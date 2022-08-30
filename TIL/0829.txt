@@ -62,8 +62,8 @@ big     ALL=(ALL:ALL) ALL
 
 # 도커허브에 push
 # 도커 로그인을 하지 않았다면 docker login 명령어를 통해 로그인 진행
-docker commit azimemory/de_base:1.1
-docker push azimemory/de_base:1.1
+docker commit seojeon9/de_base:1.1
+docker push seojeon9/de_base:1.1
 
 # 하둡 설치
 # Required Software 설치
