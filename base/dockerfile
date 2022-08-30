@@ -1,0 +1,65 @@
+# FROM : Docker Base Image (기반이 되는 이미지, <이미지 이름>:<태그> 형식으로 설정)
+# SHELL : Default Shell 지정    # -c : bash뒤에 들어오는 명령어를 수행
+# RUN : Shell Script 또는 명령을 실행
+# USER : 명령 실행할 사용자 권한 지정
+# WORKDIR : "RUN", "CMD", "ENTRYPOINT" 명령이 실행될 작업 디렉터리
+
+FROM ubuntu:20.04
+SHELL [ "/bin/bash", "-c" ]
+
+# 패키지 관리자 업데이트
+RUN apt update -y
+# -y : 업데이트 진행여부를 물어볼 때 y를 자동으로 입력
+RUN apt upgrade -y
+RUN apt install wget vim unzip sudo -y
+# wget : 웹에서 파일을 다운로드
+# vim : 텍스트 에디터
+# unzip : 알집
+# sudo : sudo 명령어를 쓰기위해 설치
+
+# 사용자 생성
+RUN useradd -m big
+
+# sudoers 파일 수정
+RUN echo 'big    ALL=NOPASSWD: ALL' >> /etc/sudoers
+
+# RUN, ENTRYPOINT, CMD
+# ENTRYPOINT, CMD : dockerfile이 실행될 때 최초로 실행되는 코드
+# ENTRYPOINT는 CMD의 쓰임새는 똑같으나 를 ENTRYPOINT는 CMD를 덮을 수 있음
+USER big
+WORKDIR /home/big
+
+# java설치
+RUN wget https://corretto.aws/downloads/latest/amazon-corretto-11-x64-linux-jdk.tar.gz
+RUN tar xvzf amazon-corretto-11-x64-linux-jdk.tar.gz
+RUN rm amazon-corretto-11-x64-linux-jdk.tar.gz
+# java 심볼릭링크 설정
+RUN ln -s $(ls |grep 'amazon-corretto-11*') java
+
+# ssh 설치 및 키 등록
+RUN sudo apt-get install ssh -y
+RUN ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
+RUN cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+
+#하둡설치
+RUN wget https://dlcdn.apache.org/hadoop/common/hadoop-3.3.4/hadoop-3.3.4.tar.gz
+RUN tar -xvzf hadoop-3.3.4.tar.gz 
+RUN rm hadoop-3.3.4.tar.gz 
+RUN ln -s $(ls |grep 'hadoop-3*') hadoop
+RUN echo 'export JAVA_HOME=/home/big/java' >> /home/big/hadoop/etc/hadoop/hadoop-env.sh 
+
+# 하둡디렉토리 설치
+WORKDIR /home/big/hadoop
+RUN mkdir temp pids namenode_dir secondary_dir datanode_dir logs
+RUN mkdir -p yarn/logs yarn/local
+
+#hadoop 환경변수 등록
+RUN echo 'export JAVA_HOME=/home/big/java' >> ~/.bashrc
+RUN echo 'export PATH=$PATH:$JAVA_HOME/bin' >> ~/.bashrc
+RUN echo 'export HADOOP_HOME=/home/big/hadoop' >> ~/.bashrc
+RUN echo 'export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop' >> ~/.bashrc
+RUN echo 'export PATH=$PATH:$HADOOP_HOME/bin' >> ~/.bashrc
+RUN echo 'export PATH=$PATH:$HADOOP_HOME/sbin' >> ~/.bashrc
+
+# vim colorscheme 설정
+RUN echo 'colorscheme pablo' >> ~/.vimrc
