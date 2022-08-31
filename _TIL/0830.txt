@@ -1,0 +1,222 @@
+# ssh 설치
+> sudo apt-get install ssh : 싱글노드
+> sudo apt-get install pdsh : 얘는 분산노드에 필요한거라 지금은 하지 않을거임
+
+# 키 등록
+# ssh를 이용하여 public키를 만들어 줘야함
+# 통신이 필요할때는 암호화가 필요함 (public키로 잠그고 private키로 열거임)
+$ ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
+$ vim ~/.ssh/id_rsa : private키 확인
+$ vim ~/.ssh/id_rsa.pub : public키 확인
+$ cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys : 설정한 퍼블릭 키 authorized_keys로 설정
+
+# 하둡설치
+1. 하둡 다운로드
+(우리가 사용하는 java11은 컴파일이 안되기 때문에 Binary파일을 사용할 거임)
+[root 말고 사용자 위치 /home/big으로 이동한 후]
+$ wget https://dlcdn.apache.org/hadoop/common/hadoop-3.3.4/hadoop-3.3.4.tar.gz
+# 압축해제
+$ tar -xvzf hadoop-3.3.4.tar.gz
+# 심볼릭 링크 설정
+$ ln -s hadoop-3.3.4 hadoop
+# 하둡 자바 환경설정해주기
+: etc/hadoop 이 위치로 가서
+$ vim hadoop-env.sh
++ export JAVA_HOME=위치 추가
+
+-> 이건 starting문서에 없음
+# hadoop 설정에 필요한 dir만들기
+$ mkdir hadoop/temp
+$ mkdir hadoop/pids
+$ mkdir hadoop/namenode_dir
+$ mkdir hadoop/secondary_dir
+$ mkdir hadoop/datanode_dir
+$ mkdir hadoop/logs
+# yarn에 필요한 dir 만들기
+$ mkdir -p hadoop/yarn/logs
+$ mkdir -p hadoop/yarn/local
+
+
+# 하둡 환경설정
+$ vim ~/.bashrc
++ export HADOOP_HOME=/home/big/hadoop
++ export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
++ export PATH=$PATH:$HADOOP_HOME/bin
++ export PATH=$PATH:$HADOOP_HOME/sbin
+
+# 윈도우로 나와서 커밋
+> docker commit de_base seojeon9/hadoop_base:1.0
+> docker push seojeon9/hadoop_base:1.0
+
+※ 컬러 스키마 설정
+~$ vim .vimrc
+colorscheme pablo
+
+# 
+etc/hadoop/core-site.xml:
+
+<configuration>
+    <property>
+        <name>fs.defaultFS</name>
+        <value>hdfs://localhost:9000</value>
+    </property>
+</configuration>
+
+etc/hadoop/hdfs-site.xml:
+
+<configuration>
+    <property>
+        <name>dfs.replication</name>
+        <value>1</value>
+    </property>
+</configuration>
+
+# name노드를 죽였는데 죽지 않았을때 어쩌구? 캐시 어쩌구?? 뷁 _ 필수는 아니지만 넣어주기
+<property>
+		<name>dfs.namenode.name.dir</name>
+		<value>/home/big/hadoop/namenode_dir</value>
+    </property>
+    <property>
+		<name>dfs.datanode.data.dir</name>
+		<value>/home/big/hadoop/datanode_dir</value>
+    </property>
+
+=================================
+	<property>
+        		<name>dfs.replication</name>
+        		<value>1</value>
+	</property>
+	<property>
+		<name>dfs.namenode.name.dir</name>
+		<value>/home/big/hadoop/namenode_dir</value>
+	</property>
+	<property>
+		<name>dfs.datanode.data.dir</name>
+		<value>/home/big/hadoop/datanode_dir</value>
+	</property>
+======================================
+
+# yarn설정
+etc/hadoop/mapred-site.xml:
+<configuration>
+<property>
+        <name>mapreduce.framework.name</name>
+        <value>yarn</value>
+    </property>
+</configuration>
+
+# name노드 만들기
+# data노드 
+$ bin/hdfs namenode -format : 하지만 우리의 경우에 환경변수를 등록했기 때문에
+hdfs namenode -format 이렇게만 하면 됨
+
+$ hdfs datanode -format
+$ sbin/start-dfs.sh : 우리는 start-dfs.sh
+# 하지만 에러가 남!! //hadoop 문서는 상당히 불친절한 편,,
+Starting namenodes on [localhost]
+localhost: ssh: connect to host localhost port 22: Cannot assign requested address
+Starting datanodes
+localhost: ssh: connect to host localhost port 22: Cannot assign requested address
+Starting secondary namenodes [117bdf7dba8b]
+117bdf7dba8b: ssh: connect to host 117bdf7dba8b port 22: Connection refused
+
+$ sudo service ssh start : ssh통신 서버 시작하고
+$ start-dfs.sh : 다시 시작!
+$ jps
+2102 NameNode
+2535 Jps
+2187 DataNode
+2348 SecondaryNameNode
+
+* 만약 안되는 원인을 모르겠으면 log파일을 봐야함
+/hadoop/logs
+$ vim hadoop-big-namenode-뭐시기.log
+
+* 혹시 했는데 안된다 이러면 
+namenode_dir가서
+current파일 날리고 다시  포맷하고 start해주면 됨? 이라고 말하신거 같긴한데
+이 부분 알아보고 다시 정리하기
+
+> docker commit de_base seojeon9/singlenode:1.0
+===========
+# 기존의 컨테이너 stop
+# 포트바인딩을 하여 새로운 컨테이너를 생성
+(윈도우에서 주소로 접근하기 위해 도커의 port와 우리의 port를 연결)
+
+> docker run -it
+--name scluster
+-h localhost		# 호스트명을 지정
+-p 18080:18080		# <호스트포트>:<컨테이너포트> spark web ui
+-p 9870:9870		# namenode
+-p 8081:8081		# jupyter notebook 접근하기 위해 
+-p 9864:9864		# datanode
+#################### 굳이 열지 않을거임 채굴업자들에게 당할 위험을 막가 위해..!
+-p 8088:8088		# yarn resourceManager
+####################
+seojeon9/singlenode:1.0	# 이미지 이름
+
+※ 명령문 여러줄 쓰게 하는 명령어 : `(windows), \(mac)
+docker run -it `
+--name scluster `
+-h localhost `
+-p 18080:18080 `
+-p 9870:9870 `
+-p 8081:8081 `
+-p 9864:9864 `
+seojeon9/singlenode:1.0
+=> root@localhost:/#	: 기존에는 root@117bdf7dba8b:/#
+
+# start service
+root@localhost:/# su big
+big@localhost:/$ sudo service ssh start
+ * Starting OpenBSD Secure Shell server sshd
+big@localhost:/$ start-dfs.sh
+Starting namenodes on [localhost]
+Starting datanodes
+Starting secondary namenodes [localhost]
+
+이렇게 하고!
+브라우저에 http://localhost:9870/ 검색해보면
+내 hadoop namenode information 페이지로 들어갈 수 있음
+
+# 하둡에 폴더 만들기
+big@localhost:/$ hdfs dfs -mkdir /test
+big@localhost:/$ hdfs dfs -ls /
+Found 1 items
+drwxr-xr-x   - big supergroup          0 2022-08-30 14:35 /test
+# 삭제
+big@localhost:/$ hdfs dfs -rm -r  /test
+
+# 권한 주기
+big@localhost:/$ hdfs dfs -chmod 777 /
+
+
+============================================
+DE/base/dockerfile 생성 => 도커 환경설정 자동화!!
+# sudoers 파일 수정
+# shell에서는 vim으로 파일을 열어서 직접 기입을 해줬는데
+# 이걸 echo로 해 줄 수 있음
+RUN echo 'big    ALL=NOPASSWD: ALL' >> /etc/sudoers
+
+* |grep 옵션 : 해당하는 문자로 시작하는 문자 찾아옴
+ ls |grep 'amazon-correctto-11*'
+
+# 압축 푼 애를 java로 심볼릭링크를 걺
+ln -s $(ls |grep 'amazon-corretto-11*') java
+
+* echo : 뿌려주는거
+* echo >> : 붙여주는거
+
+# dockerfile 이용해서 기본 세팅 마치기!
+PS C:\Users\tjwjd> cd C:\CODE\DE\base
+PS C:\CODE\DE\base> docker build -t seojeon9/test .
+
+==================================================
+지금 작성한 자동화 코드는 그렇게 좋지는 않음 
+왜냐하면 FROM 해온 이미지가 사라질 수도 있고
+java나 hadoop설치해온 링크가 나중에는 제공을 해주지 않을 수도 있는 문제들이 있기 때문
+그래서 사용자가 커스터마이징 하게 하기 위해서
+dockerfile을 앞서 작성한거 처럼 모든 코드로 하기보다 각 환경들은 이미지로 만들어 놓고
+이 부분은 니가 세팅하고 싶은대로 해라 라고 지정해주고
+필요한 cp로 붙일 수 있게 하는 것이 좋음!!
+
