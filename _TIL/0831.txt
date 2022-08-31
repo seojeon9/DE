@@ -1,0 +1,312 @@
+docker run -it `
+--name mcluster `
+-h localhost `
+-p 18080:18080 `
+-p 9870:9870 `
+-p 9864:9864 `
+-p 8081:8081 `
+seojeon9/hadoop_base:1.0
+
+* bashrc 소스 변경하고 나면
+source ~/.bashrc 해줘야함
+=================================
+Cluster Setup
+https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/ClusterSetup.html
+-> 파라미터 default값이 없는애들 위주로 설정해줄거임
+
+> cd $HADOOP_CONF_DIR/
+
+core-site.xml :
+<property>
+        <name>fs.defaultFS</name>
+        <value>hdfs://localhost:9000</value>
+</property>
+
+hdfs-site.xml :
+<property>
+	<name>dfs.namenode.name.dir</name>
+	<value>/home/big/hadoop/namenode_dir</value>
+</property>
+<property>
+	<name>dfs.datanode.data.dir</name>
+	<value>/home/big/hadoop/datanode_dir</value>
+</property>
+<property>
+	<name>dfs.datanode.http.address</name>
+	<value>0.0.0.0:9864</value>
+</property>
+
+yarn-site.xml :
+<property> 
+	<name>yarn.nodemanager.log-dirs</name>
+	<value>file:///hadoop/yarn/logs</value>
+</property>
+<property>
+	<name>yarn.resourcemanager.hostname</name>
+	<value>namenode</value>
+</property>
+<property> : 임시적인 스테이징 데이터 쌓아 놓는 DIR 설정
+	<name>yarn.nodemanager.local-dirs</name>
+	<value>file:///hadoop/yarn/local</value>
+</property>
+
+mapred-site.xml :
+<property>
+        <name>mapreduce.framework.name</name>
+        <value>yarn</value>
+    </property>
+
+hadoop-env.sh :
+export JAVA_HOME=/home/big/java
+export HADOOP_HOME=/home/big/hadoop
+export HADOOP_LOG_DIR=${HADOOP_HOME}/logs
+
+# hadoop master -slaver설정
+workers :
+localhost 지우고
+
+datanode1
+datanode2
+datanode3
+# 저장
+
+> docker commit mcluster seojeon9/mcluster
+
+
+
+
+> docker network ls
+NETWORK ID     NAME      DRIVER    SCOPE
+6b637d5f415a   bridge    bridge    local
+21a14efe4b00   host      host      local
+e46c4499619f   none      null      local
+
+가상네트워크인 bridge네트워크를 사용할건데 컨테이너를 올리면 유동적으로 IP를 만듦 
+컨테이너가 켜지는 순서대로 만들어주기 때문에 미리 켜져있는 컨테이너가 있거나 그러면 내가 IP를 예측하기 어려움
+그래서 서브 네트워크를 생성할거다         (10개의 IP)
+> docker network create --subnet 172.29.0.0/10 --gateway 172.29.0.1 debridge
+# 172.29.0.2 ~ 172.29.0.10의 IP를 부여할 수 있는 작은 네트워크를 생성
+# 172.29.0.1은 네트워크의 진입점인 게이트웨이의 IP의 때문에 사용이 불가능
+: Error response from daemon: Pool overlaps with other one on this address space # 근디 에러가 뜨넴
+
+> docker inspect mcluster
+"Gateway": "172.17.0.1",
+"GlobalIPv6Address": "",
+"GlobalIPv6PrefixLen": 0,
+"IPAddress": "172.17.0.2",
+: 그래서 일단은 그냥 자동으로 배정되게 두겠음,,
+
+
+
+
+# 네트워트를 서로 이름으로 부를 수 있도록 하겠음 -> 컨테이너끼리 통신을 할 수 있음
+# 네임노드
+docker run -itd `
+-h namenode `
+--name namenode `
+-p 9870:9870 `
+-p 8088:8088 `
+-p 9864:9864 `
+seojeon9/mcluster
+
+# d : 백그라운드 실행
+# h : 호스트이름 설정 -> yarn에 설정했던 이름
+
+# 데이터 노드
+docker run -itd `
+-h datanode1 `
+--name datanode1 `
+-p 9861:9861 `
+--link namenode:namenode `
+seojeon9/mcluster
+
+# 9861 : 기존에 9864로 하는데 도커 환경에서는 다 따로 만들어줘야 하기때문에 9861로 함
+docker run -itd `
+-h datanode2 `
+--name datanode2 `
+-p 9862:9862 `
+--link namenode:namenode `
+seojeon9/mcluster
+
+docker run -itd `
+-h datanode3 `
+--name datanode3 `
+-p 9863:9863 `
+--link namenode:namenode `
+seojeon9/mcluster
+=> 다 name노드를 바라봐야함. 그래야 서로의 이름으로 부를 수 있음 (--link)
+
+# 서로 통신을 할 수 있어야 함 => ssh 열어주기
+service ssh start
+: namenode/ datanode1/ 2/ 3 전부!!
+
+# namenode에 붙어서 datanode1/2/3 불러볼거임
+# 우선 전화번호부를 작성할거임
+# 도메인에서 검색해보기 위해 전화번호부를 작성하면 전화번호부부터 찾아봄
+big@namenode:/$ sudo vim /etc/hosts
+172.17.0.2      namenode
+172.17.0.3      datanode1
+172.17.0.4      datanode2
+172.17.0.5      datanode3
+
+# ssh 통신 확인
+big@namenode:/$ ssh datanode1
+big@datanode1:~$		# datanode1로 들어와짐 exit하면 다시 namenode
+big@datanode1:~$	 sudo service ssh start	# 안전하게 한번 더 켜줌
+
+# 후처리 : datanode포트를 따로 설정해줘야함 
+hdfs-site.xml :
+<property>
+                <name>dfs.datanode.http.address</name>
+                <value>0.0.0.0:9864</value> 	: 9861/9862/9863 으로 바꾸기
+</property>
+
+
+big@namenode:/$ hdfs namenode -format
+big@namenode:/$ hdfs datanode -format
+big@namenode:~$ start-dfs.sh
+Starting namenodes on [namenode]
+Starting datanodes
+Starting secondary namenodes [namenode]
+big@namenode:~$ jps
+3329 Jps
+2977 NameNode
+3164 SecondaryNameNode
+
+big@namenode:~/hadoop/etc/hadoop$ vim core-site.xml :
+<property>
+                <name>fs.defaultFS</name>
+                <value>hdfs://namenode:9000</value>
+</property>
+
+> docker commit namenode seojeon9/mcluster
+
+============================================
+docker compose file
+: 이전에는 쿠버네티스를 자주 사용했음 근데 지금 서로 사이가 안좋아져서
+docker가 compose만들었음 (뭐하는애인지 다시 확인해보기)
+
+DE > multi > compose.yaml 생성
+
+> docker-compose version 	# 버전 확인
+
+# 컴포즈 파일 실행해보기
+> cd C:\CODE\DE\multi
+> docker-compose up
+
+============================================
+start-dfs.sh : hadoop과 관련된 노드만 올라감
+start-all.sh : yarn과 관련된 모든 노드가 올라감
+
+# spark 설치
+: hadoop이 없는 버전을 다운 받을거임
+
+big@localhost:~$ wget https://dlcdn.apache.org/spark/spark-3.2.2/spark-3.2.2-bin-without-hadoop.tgz
+big@localhost:~$ tar -xvzf spark-3.2.2-bin-without-hadoop.tgz
+big@localhost:~$ ln -s spark-3.2.2-bin-without-hadoop spark
+big@localhost:~$ rm spark-3.2.2-bin-without-hadoop.tgz
+
+# spark환경변수 등록
+export SPARK_HOME=/home/big/spark
+
+export PATH=$PATH:$SPARK_HOME/bin
+export PATH=$PATH:$SPARK_HOME/sbin
+
+> source ~/.bashrc
+
+# https://spark.apache.org/docs/latest/hadoop-provided.html
+big@localhost:~/spark/conf$ cp spark-env.sh.template spark-env.sh
+$ vim spark-env.sh
+export SPARK_DIST_CLASSPATH=$(/home/big/hadoop/bin/hadoop classpath)
+
+# https://spark.apache.org/docs/3.1.3/configuration.html#inheriting-hadoop-cluster-configuration
+스파크에게 내가 쓸 하둡이 있는 경로 알려주기
+export HADOOP_CONF_DIR=/home/big/hadoop/etc/hadoop
+
+# pyspark 설치
+sudo apt install python3-pip -y
+pip install pyspark==3.2.2 (이때도 와이파이로 해야 됨 KT나빠!!)
+
+which python3 : 위치 알려줌
+# https://spark.apache.org/docs/3.2.2/configuration.html#environment-variables
+export PYSPARK_PYTHON=/usr/bin/python3
+export PYSPARK_DRIVER_PYTHON=/usr/bin/python3
+
+# yarn실행
+pyspark --master yarn 
+
+# jupyter notebook 설치해서 붙어서 사용할거임
+pip install jupyter
+
+export PYSPARK_DRIVER_PYTHON=jupyter
+export PYSPARK_DRIVER_PYTHON_OPTS='notebook'
+
+source ~/.bashrc
+
+jupyter notebook --generate-config
+
+=============================
+근데 원래 pip로 설치하는게 일반적인데 지금 안돼서
+pip uninstall jupyter
+해서 기존에 다운받은거 지우고
+sudo apt-get install jupyter
+이걸로 다시 설치하기
+
+# jupyter 설정하기
+big@localhost:~$ mkdir study
+big@localhost:~$ ls
+amazon-corretto-11-x64-linux-jdk.tar.gz  hadoop        hadoop-3.3.4.tar.gz  spark                           study
+amazon-corretto-11.0.16.9.1-linux-x64    hadoop-3.3.4  java                 spark-3.2.2-bin-without-hadoop
+big@localhost:~$ ls -a
+.              .bashrc.swp  .python_history  amazon-corretto-11-x64-linux-jdk.tar.gz  java
+..             .cache       .ssh             amazon-corretto-11.0.16.9.1-linux-x64    spark
+.bash_history  .jupyter     .viminfo         hadoop                                   spark-3.2.2-bin-without-hadoop
+.bash_logout   .local       .vimrc           hadoop-3.3.4                             study
+.bashrc        .profile     .wget-hsts       hadoop-3.3.4.tar.gz
+big@localhost:~$ cd .jupyter
+big@localhost:~/.jupyter$ ls
+jupyter_notebook_config.py
+big@localhost:~/.jupyter$ vim jupyter_notebook_config.py
+
+# vim에서 단어 찾기 ( / )
+/notebook.dir
+밑으로 탐색하고 싶으면 n누르기
+
+# jupyter 경로 설정
+c.NotebookApp.notebook_dir = '/home/big/study'
+
+/c.NotebookApp.ip
+c.NotebookApp.ip = 'localhost' -> c.NotebookApp.ip = '0.0.0.0'
+
+/c.NotebookApp.port
+8888 -> c.NotebookApp.port = 8081
+
+==============================================
+-주피터 키는법-
+hadoop을 올리고 : service ssh start
+spark올리기 : pyspark --master yarn
+==============================================
+docker commit scluster seojeon9/scluster:1.0
+docker push seojeon9/scluster:1.0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

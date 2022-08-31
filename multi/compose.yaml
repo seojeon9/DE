@@ -1,0 +1,48 @@
+# docker-compose 명령어
+# docker-compose up : 컨테이너를 생성하고 시작
+# docker-compose stop : 컨테이너를 정지
+# docker-compose start : 정지된 컨테이너를 시작
+# docker-compose restart : 재시작
+# docker-compose kill : 컨테이너 강제 정지
+# docker-compose rm : 컨테이너 삭제
+
+services:
+  namenode:
+    container_name: namenode
+    hostname: namenode
+    image: seojeon9/mcluster
+    ports:
+      - "9870:9870"
+      - "8088:8088"
+      - "9864:9864"
+    command: sh -c "sudo service ssh start && sleep infinity"
+
+  datanode1:
+    container_name: datanode1
+    hostname: datanode1
+    image: seojeon9/mcluster
+    ports:
+      - "9861:9861"
+    links:
+      - namenode
+    command: sh -c "sudo service ssh start && sleep infinity"
+
+  datanode2:
+    container_name: datanode2
+    hostname: datanode2
+    image: seojeon9/mcluster
+    ports:
+      - "9862:9862"
+    links:
+      - namenode
+    command: sh -c "sudo service ssh start && sleep infinity"
+
+  datanode3:
+    container_name: datanode3
+    hostname: datanode3
+    image: seojeon9/mcluster
+    ports:
+      - "9863:9863"
+    links:
+      - namenode
+    command: sh -c "sudo service ssh start && sleep infinity"
