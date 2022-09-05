@@ -1,0 +1,892 @@
+Ticket,PassengerId,Fare,Embarked
+A/5 21171,1,7.25,Southampton
+PC 17599,2,71.2833,Cherbourg
+STON/O2. 3101282,3,7.925,Southampton
+113803,4,53.1,Southampton
+373450,5,8.05,Southampton
+330877,6,8.4583,Queenstown
+17463,7,51.8625,Southampton
+349909,8,21.075,Southampton
+347742,9,11.1333,Southampton
+237736,10,30.0708,Cherbourg
+PP 9549,11,16.7,Southampton
+113783,12,26.55,Southampton
+A/5. 2151,13,8.05,Southampton
+347082,14,31.275,Southampton
+350406,15,7.8542,Southampton
+248706,16,16,Southampton
+382652,17,29.125,Queenstown
+244373,18,13,Southampton
+345763,19,18,Southampton
+2649,20,7.225,Cherbourg
+239865,21,26,Southampton
+248698,22,13,Southampton
+330923,23,8.0292,Queenstown
+113788,24,35.5,Southampton
+349909,25,21.075,Southampton
+347077,26,31.3875,Southampton
+2631,27,7.225,Cherbourg
+19950,28,263,Southampton
+330959,29,7.8792,Queenstown
+349216,30,7.8958,Southampton
+PC 17601,31,27.7208,Cherbourg
+PC 17569,32,146.5208,Cherbourg
+335677,33,7.75,Queenstown
+C.A. 24579,34,10.5,Southampton
+PC 17604,35,82.1708,Cherbourg
+113789,36,52,Southampton
+2677,37,7.2292,Cherbourg
+A./5. 2152,38,8.05,Southampton
+345764,39,18,Southampton
+2651,40,11.2417,Cherbourg
+7546,41,9.475,Southampton
+11668,42,21,Southampton
+349253,43,7.8958,Cherbourg
+SC/Paris 2123,44,41.5792,Cherbourg
+330958,45,7.8792,Queenstown
+S.C./A.4. 23567,46,8.05,Southampton
+370371,47,15.5,Queenstown
+14311,48,7.75,Queenstown
+2662,49,21.6792,Cherbourg
+349237,50,17.8,Southampton
+3101295,51,39.6875,Southampton
+A/4. 39886,52,7.8,Southampton
+PC 17572,53,76.7292,Cherbourg
+2926,54,26,Southampton
+113509,55,61.9792,Cherbourg
+19947,56,35.5,Southampton
+C.A. 31026,57,10.5,Southampton
+2697,58,7.2292,Cherbourg
+C.A. 34651,59,27.75,Southampton
+CA 2144,60,46.9,Southampton
+2669,61,7.2292,Cherbourg
+113572,62,80,
+36973,63,83.475,Southampton
+347088,64,27.9,Southampton
+PC 17605,65,27.7208,Cherbourg
+2661,66,15.2458,Cherbourg
+C.A. 29395,67,10.5,Southampton
+S.P. 3464,68,8.1583,Southampton
+3101281,69,7.925,Southampton
+315151,70,8.6625,Southampton
+C.A. 33111,71,10.5,Southampton
+CA 2144,72,46.9,Southampton
+S.O.C. 14879,73,73.5,Southampton
+2680,74,14.4542,Cherbourg
+1601,75,56.4958,Southampton
+348123,76,7.65,Southampton
+349208,77,7.8958,Southampton
+374746,78,8.05,Southampton
+248738,79,29,Southampton
+364516,80,12.475,Southampton
+345767,81,9,Southampton
+345779,82,9.5,Southampton
+330932,83,7.7875,Queenstown
+113059,84,47.1,Southampton
+SO/C 14885,85,10.5,Southampton
+3101278,86,15.85,Southampton
+W./C. 6608,87,34.375,Southampton
+SOTON/OQ 392086,88,8.05,Southampton
+19950,89,263,Southampton
+343275,90,8.05,Southampton
+343276,91,8.05,Southampton
+347466,92,7.8542,Southampton
+W.E.P. 5734,93,61.175,Southampton
+C.A. 2315,94,20.575,Southampton
+364500,95,7.25,Southampton
+374910,96,8.05,Southampton
+PC 17754,97,34.6542,Cherbourg
+PC 17759,98,63.3583,Cherbourg
+231919,99,23,Southampton
+244367,100,26,Southampton
+349245,101,7.8958,Southampton
+349215,102,7.8958,Southampton
+35281,103,77.2875,Southampton
+7540,104,8.6542,Southampton
+3101276,105,7.925,Southampton
+349207,106,7.8958,Southampton
+343120,107,7.65,Southampton
+312991,108,7.775,Southampton
+349249,109,7.8958,Southampton
+371110,110,24.15,Queenstown
+110465,111,52,Southampton
+2665,112,14.4542,Cherbourg
+324669,113,8.05,Southampton
+4136,114,9.825,Southampton
+2627,115,14.4583,Cherbourg
+STON/O 2. 3101294,116,7.925,Southampton
+370369,117,7.75,Queenstown
+11668,118,21,Southampton
+PC 17558,119,247.5208,Cherbourg
+347082,120,31.275,Southampton
+S.O.C. 14879,121,73.5,Southampton
+A4. 54510,122,8.05,Southampton
+237736,123,30.0708,Cherbourg
+27267,124,13,Southampton
+35281,125,77.2875,Southampton
+2651,126,11.2417,Cherbourg
+370372,127,7.75,Queenstown
+C 17369,128,7.1417,Southampton
+2668,129,22.3583,Cherbourg
+347061,130,6.975,Southampton
+349241,131,7.8958,Cherbourg
+SOTON/O.Q. 3101307,132,7.05,Southampton
+A/5. 3337,133,14.5,Southampton
+228414,134,26,Southampton
+C.A. 29178,135,13,Southampton
+SC/PARIS 2133,136,15.0458,Cherbourg
+11752,137,26.2833,Southampton
+113803,138,53.1,Southampton
+7534,139,9.2167,Southampton
+PC 17593,140,79.2,Cherbourg
+2678,141,15.2458,Cherbourg
+347081,142,7.75,Southampton
+STON/O2. 3101279,143,15.85,Southampton
+365222,144,6.75,Queenstown
+231945,145,11.5,Southampton
+C.A. 33112,146,36.75,Southampton
+350043,147,7.7958,Southampton
+W./C. 6608,148,34.375,Southampton
+230080,149,26,Southampton
+244310,150,13,Southampton
+S.O.P. 1166,151,12.525,Southampton
+113776,152,66.6,Southampton
+A.5. 11206,153,8.05,Southampton
+A/5. 851,154,14.5,Southampton
+Fa 265302,155,7.3125,Southampton
+PC 17597,156,61.3792,Cherbourg
+35851,157,7.7333,Queenstown
+SOTON/OQ 392090,158,8.05,Southampton
+315037,159,8.6625,Southampton
+CA. 2343,160,69.55,Southampton
+371362,161,16.1,Southampton
+C.A. 33595,162,15.75,Southampton
+347068,163,7.775,Southampton
+315093,164,8.6625,Southampton
+3101295,165,39.6875,Southampton
+363291,166,20.525,Southampton
+113505,167,55,Southampton
+347088,168,27.9,Southampton
+PC 17318,169,25.925,Southampton
+1601,170,56.4958,Southampton
+111240,171,33.5,Southampton
+382652,172,29.125,Queenstown
+347742,173,11.1333,Southampton
+STON/O 2. 3101280,174,7.925,Southampton
+17764,175,30.6958,Cherbourg
+350404,176,7.8542,Southampton
+4133,177,25.4667,Southampton
+PC 17595,178,28.7125,Cherbourg
+250653,179,13,Southampton
+LINE,180,0,Southampton
+CA. 2343,181,69.55,Southampton
+SC/PARIS 2131,182,15.05,Cherbourg
+347077,183,31.3875,Southampton
+230136,184,39,Southampton
+315153,185,22.025,Southampton
+113767,186,50,Southampton
+370365,187,15.5,Queenstown
+111428,188,26.55,Southampton
+364849,189,15.5,Queenstown
+349247,190,7.8958,Southampton
+234604,191,13,Southampton
+28424,192,13,Southampton
+350046,193,7.8542,Southampton
+230080,194,26,Southampton
+PC 17610,195,27.7208,Cherbourg
+PC 17569,196,146.5208,Cherbourg
+368703,197,7.75,Queenstown
+4579,198,8.4042,Southampton
+370370,199,7.75,Queenstown
+248747,200,13,Southampton
+345770,201,9.5,Southampton
+CA. 2343,202,69.55,Southampton
+3101264,203,6.4958,Southampton
+2628,204,7.225,Cherbourg
+A/5 3540,205,8.05,Southampton
+347054,206,10.4625,Southampton
+3101278,207,15.85,Southampton
+2699,208,18.7875,Cherbourg
+367231,209,7.75,Queenstown
+112277,210,31,Cherbourg
+SOTON/O.Q. 3101311,211,7.05,Southampton
+F.C.C. 13528,212,21,Southampton
+A/5 21174,213,7.25,Southampton
+250646,214,13,Southampton
+367229,215,7.75,Queenstown
+35273,216,113.275,Cherbourg
+STON/O2. 3101283,217,7.925,Southampton
+243847,218,27,Southampton
+11813,219,76.2917,Cherbourg
+W/C 14208,220,10.5,Southampton
+SOTON/OQ 392089,221,8.05,Southampton
+220367,222,13,Southampton
+21440,223,8.05,Southampton
+349234,224,7.8958,Southampton
+19943,225,90,Southampton
+PP 4348,226,9.35,Southampton
+SW/PP 751,227,10.5,Southampton
+A/5 21173,228,7.25,Southampton
+236171,229,13,Southampton
+4133,230,25.4667,Southampton
+36973,231,83.475,Southampton
+347067,232,7.775,Southampton
+237442,233,13.5,Southampton
+347077,234,31.3875,Southampton
+C.A. 29566,235,10.5,Southampton
+W./C. 6609,236,7.55,Southampton
+26707,237,26,Southampton
+C.A. 31921,238,26.25,Southampton
+28665,239,10.5,Southampton
+SCO/W 1585,240,12.275,Southampton
+2665,241,14.4542,Cherbourg
+367230,242,15.5,Queenstown
+W./C. 14263,243,10.5,Southampton
+STON/O 2. 3101275,244,7.125,Southampton
+2694,245,7.225,Cherbourg
+19928,246,90,Queenstown
+347071,247,7.775,Southampton
+250649,248,14.5,Southampton
+11751,249,52.5542,Southampton
+244252,250,26,Southampton
+362316,251,7.25,Southampton
+347054,252,10.4625,Southampton
+113514,253,26.55,Southampton
+A/5. 3336,254,16.1,Southampton
+370129,255,20.2125,Southampton
+2650,256,15.2458,Cherbourg
+PC 17585,257,79.2,Cherbourg
+110152,258,86.5,Southampton
+PC 17755,259,512.3292,Cherbourg
+230433,260,26,Southampton
+384461,261,7.75,Queenstown
+347077,262,31.3875,Southampton
+110413,263,79.65,Southampton
+112059,264,0,Southampton
+382649,265,7.75,Queenstown
+C.A. 17248,266,10.5,Southampton
+3101295,267,39.6875,Southampton
+347083,268,7.775,Southampton
+PC 17582,269,153.4625,Southampton
+PC 17760,270,135.6333,Southampton
+113798,271,31,Southampton
+LINE,272,0,Southampton
+250644,273,19.5,Southampton
+PC 17596,274,29.7,Cherbourg
+370375,275,7.75,Queenstown
+13502,276,77.9583,Southampton
+347073,277,7.75,Southampton
+239853,278,0,Southampton
+382652,279,29.125,Queenstown
+C.A. 2673,280,20.25,Southampton
+336439,281,7.75,Queenstown
+347464,282,7.8542,Southampton
+345778,283,9.5,Southampton
+A/5. 10482,284,8.05,Southampton
+113056,285,26,Southampton
+349239,286,8.6625,Cherbourg
+345774,287,9.5,Southampton
+349206,288,7.8958,Southampton
+237798,289,13,Southampton
+370373,290,7.75,Queenstown
+19877,291,78.85,Southampton
+11967,292,91.0792,Cherbourg
+SC/Paris 2163,293,12.875,Cherbourg
+349236,294,8.85,Southampton
+349233,295,7.8958,Southampton
+PC 17612,296,27.7208,Cherbourg
+2693,297,7.2292,Cherbourg
+113781,298,151.55,Southampton
+19988,299,30.5,Southampton
+PC 17558,300,247.5208,Cherbourg
+9234,301,7.75,Queenstown
+367226,302,23.25,Queenstown
+LINE,303,0,Southampton
+226593,304,12.35,Queenstown
+A/5 2466,305,8.05,Southampton
+113781,306,151.55,Southampton
+17421,307,110.8833,Cherbourg
+PC 17758,308,108.9,Cherbourg
+P/PP 3381,309,24,Cherbourg
+PC 17485,310,56.9292,Cherbourg
+11767,311,83.1583,Cherbourg
+PC 17608,312,262.375,Cherbourg
+250651,313,26,Southampton
+349243,314,7.8958,Southampton
+F.C.C. 13529,315,26.25,Southampton
+347470,316,7.8542,Southampton
+244367,317,26,Southampton
+29011,318,14,Southampton
+36928,319,164.8667,Southampton
+16966,320,134.5,Cherbourg
+A/5 21172,321,7.25,Southampton
+349219,322,7.8958,Southampton
+234818,323,12.35,Queenstown
+248738,324,29,Southampton
+CA. 2343,325,69.55,Southampton
+PC 17760,326,135.6333,Cherbourg
+345364,327,6.2375,Southampton
+28551,328,13,Southampton
+363291,329,20.525,Southampton
+111361,330,57.9792,Cherbourg
+367226,331,23.25,Queenstown
+113043,332,28.5,Southampton
+PC 17582,333,153.4625,Southampton
+345764,334,18,Southampton
+PC 17611,335,133.65,Southampton
+349225,336,7.8958,Southampton
+113776,337,66.6,Southampton
+16966,338,134.5,Cherbourg
+7598,339,8.05,Southampton
+113784,340,35.5,Southampton
+230080,341,26,Southampton
+19950,342,263,Southampton
+248740,343,13,Southampton
+244361,344,13,Southampton
+229236,345,13,Southampton
+248733,346,13,Southampton
+31418,347,13,Southampton
+386525,348,16.1,Southampton
+C.A. 37671,349,15.9,Southampton
+315088,350,8.6625,Southampton
+7267,351,9.225,Southampton
+113510,352,35,Southampton
+2695,353,7.2292,Cherbourg
+349237,354,17.8,Southampton
+2647,355,7.225,Cherbourg
+345783,356,9.5,Southampton
+113505,357,55,Southampton
+237671,358,13,Southampton
+330931,359,7.8792,Queenstown
+330980,360,7.8792,Queenstown
+347088,361,27.9,Southampton
+SC/PARIS 2167,362,27.7208,Cherbourg
+2691,363,14.4542,Cherbourg
+SOTON/O.Q. 3101310,364,7.05,Southampton
+370365,365,15.5,Queenstown
+C 7076,366,7.25,Southampton
+110813,367,75.25,Cherbourg
+2626,368,7.2292,Cherbourg
+14313,369,7.75,Queenstown
+PC 17477,370,69.3,Cherbourg
+11765,371,55.4417,Cherbourg
+3101267,372,6.4958,Southampton
+323951,373,8.05,Southampton
+PC 17760,374,135.6333,Cherbourg
+349909,375,21.075,Southampton
+PC 17604,376,82.1708,Cherbourg
+C 7077,377,7.25,Southampton
+113503,378,211.5,Cherbourg
+2648,379,4.0125,Cherbourg
+347069,380,7.775,Southampton
+PC 17757,381,227.525,Cherbourg
+2653,382,15.7417,Cherbourg
+STON/O 2. 3101293,383,7.925,Southampton
+113789,384,52,Southampton
+349227,385,7.8958,Southampton
+S.O.C. 14879,386,73.5,Southampton
+CA 2144,387,46.9,Southampton
+27849,388,13,Southampton
+367655,389,7.7292,Queenstown
+SC 1748,390,12,Cherbourg
+113760,391,120,Southampton
+350034,392,7.7958,Southampton
+3101277,393,7.925,Southampton
+35273,394,113.275,Cherbourg
+PP 9549,395,16.7,Southampton
+350052,396,7.7958,Southampton
+350407,397,7.8542,Southampton
+28403,398,26,Southampton
+244278,399,10.5,Southampton
+240929,400,12.65,Southampton
+STON/O 2. 3101289,401,7.925,Southampton
+341826,402,8.05,Southampton
+4137,403,9.825,Southampton
+STON/O2. 3101279,404,15.85,Southampton
+315096,405,8.6625,Southampton
+28664,406,21,Southampton
+347064,407,7.75,Southampton
+29106,408,18.75,Southampton
+312992,409,7.775,Southampton
+4133,410,25.4667,Southampton
+349222,411,7.8958,Southampton
+394140,412,6.8583,Queenstown
+19928,413,90,Queenstown
+239853,414,0,Southampton
+STON/O 2. 3101269,415,7.925,Southampton
+343095,416,8.05,Southampton
+28220,417,32.5,Southampton
+250652,418,13,Southampton
+28228,419,13,Southampton
+345773,420,24.15,Southampton
+349254,421,7.8958,Cherbourg
+A/5. 13032,422,7.7333,Queenstown
+315082,423,7.875,Southampton
+347080,424,14.4,Southampton
+370129,425,20.2125,Southampton
+A/4. 34244,426,7.25,Southampton
+2003,427,26,Southampton
+250655,428,26,Southampton
+364851,429,7.75,Queenstown
+SOTON/O.Q. 392078,430,8.05,Southampton
+110564,431,26.55,Southampton
+376564,432,16.1,Southampton
+SC/AH 3085,433,26,Southampton
+STON/O 2. 3101274,434,7.125,Southampton
+13507,435,55.9,Southampton
+113760,436,120,Southampton
+W./C. 6608,437,34.375,Southampton
+29106,438,18.75,Southampton
+19950,439,263,Southampton
+C.A. 18723,440,10.5,Southampton
+F.C.C. 13529,441,26.25,Southampton
+345769,442,9.5,Southampton
+347076,443,7.775,Southampton
+230434,444,13,Southampton
+65306,445,8.1125,Southampton
+33638,446,81.8583,Southampton
+250644,447,19.5,Southampton
+113794,448,26.55,Southampton
+2666,449,19.2583,Cherbourg
+113786,450,30.5,Southampton
+C.A. 34651,451,27.75,Southampton
+65303,452,19.9667,Southampton
+113051,453,27.75,Cherbourg
+17453,454,89.1042,Cherbourg
+A/5 2817,455,8.05,Southampton
+349240,456,7.8958,Cherbourg
+13509,457,26.55,Southampton
+17464,458,51.8625,Southampton
+F.C.C. 13531,459,10.5,Southampton
+371060,460,7.75,Queenstown
+19952,461,26.55,Southampton
+364506,462,8.05,Southampton
+111320,463,38.5,Southampton
+234360,464,13,Southampton
+A/S 2816,465,8.05,Southampton
+SOTON/O.Q. 3101306,466,7.05,Southampton
+239853,467,0,Southampton
+113792,468,26.55,Southampton
+36209,469,7.725,Queenstown
+2666,470,19.2583,Cherbourg
+323592,471,7.25,Southampton
+315089,472,8.6625,Southampton
+C.A. 34651,473,27.75,Southampton
+SC/AH Basle 541,474,13.7917,Cherbourg
+7553,475,9.8375,Southampton
+110465,476,52,Southampton
+31027,477,21,Southampton
+3460,478,7.0458,Southampton
+350060,479,7.5208,Southampton
+3101298,480,12.2875,Southampton
+CA 2144,481,46.9,Southampton
+239854,482,0,Southampton
+A/5 3594,483,8.05,Southampton
+4134,484,9.5875,Southampton
+11967,485,91.0792,Cherbourg
+4133,486,25.4667,Southampton
+19943,487,90,Southampton
+11771,488,29.7,Cherbourg
+A.5. 18509,489,8.05,Southampton
+C.A. 37671,490,15.9,Southampton
+65304,491,19.9667,Southampton
+SOTON/OQ 3101317,492,7.25,Southampton
+113787,493,30.5,Southampton
+PC 17609,494,49.5042,Cherbourg
+A/4 45380,495,8.05,Southampton
+2627,496,14.4583,Cherbourg
+36947,497,78.2667,Cherbourg
+C.A. 6212,498,15.1,Southampton
+113781,499,151.55,Southampton
+350035,500,7.7958,Southampton
+315086,501,8.6625,Southampton
+364846,502,7.75,Queenstown
+330909,503,7.6292,Queenstown
+4135,504,9.5875,Southampton
+110152,505,86.5,Southampton
+PC 17758,506,108.9,Cherbourg
+26360,507,26,Southampton
+111427,508,26.55,Southampton
+C 4001,509,22.525,Southampton
+1601,510,56.4958,Southampton
+382651,511,7.75,Queenstown
+SOTON/OQ 3101316,512,8.05,Southampton
+PC 17473,513,26.2875,Southampton
+PC 17603,514,59.4,Cherbourg
+349209,515,7.4958,Southampton
+36967,516,34.0208,Southampton
+C.A. 34260,517,10.5,Southampton
+371110,518,24.15,Queenstown
+226875,519,26,Southampton
+349242,520,7.8958,Southampton
+12749,521,93.5,Southampton
+349252,522,7.8958,Southampton
+2624,523,7.225,Cherbourg
+111361,524,57.9792,Cherbourg
+2700,525,7.2292,Cherbourg
+367232,526,7.75,Queenstown
+W./C. 14258,527,10.5,Southampton
+PC 17483,528,221.7792,Southampton
+3101296,529,7.925,Southampton
+29104,530,11.5,Southampton
+26360,531,26,Southampton
+2641,532,7.2292,Cherbourg
+2690,533,7.2292,Cherbourg
+2668,534,22.3583,Cherbourg
+315084,535,8.6625,Southampton
+F.C.C. 13529,536,26.25,Southampton
+113050,537,26.55,Southampton
+PC 17761,538,106.425,Cherbourg
+364498,539,14.5,Southampton
+13568,540,49.5,Cherbourg
+WE/P 5735,541,71,Southampton
+347082,542,31.275,Southampton
+347082,543,31.275,Southampton
+2908,544,26,Southampton
+PC 17761,545,106.425,Cherbourg
+693,546,26,Southampton
+2908,547,26,Southampton
+SC/PARIS 2146,548,13.8625,Cherbourg
+363291,549,20.525,Southampton
+C.A. 33112,550,36.75,Southampton
+17421,551,110.8833,Cherbourg
+244358,552,26,Southampton
+330979,553,7.8292,Queenstown
+2620,554,7.225,Cherbourg
+347085,555,7.775,Southampton
+113807,556,26.55,Southampton
+11755,557,39.6,Cherbourg
+PC 17757,558,227.525,Cherbourg
+110413,559,79.65,Southampton
+345572,560,17.4,Southampton
+372622,561,7.75,Queenstown
+349251,562,7.8958,Southampton
+218629,563,13.5,Southampton
+SOTON/OQ 392082,564,8.05,Southampton
+SOTON/O.Q. 392087,565,8.05,Southampton
+A/4 48871,566,24.15,Southampton
+349205,567,7.8958,Southampton
+349909,568,21.075,Southampton
+2686,569,7.2292,Cherbourg
+350417,570,7.8542,Southampton
+S.W./PP 752,571,10.5,Southampton
+11769,572,51.4792,Southampton
+PC 17474,573,26.3875,Southampton
+14312,574,7.75,Queenstown
+A/4. 20589,575,8.05,Southampton
+358585,576,14.5,Southampton
+243880,577,13,Southampton
+13507,578,55.9,Southampton
+2689,579,14.4583,Cherbourg
+STON/O 2. 3101286,580,7.925,Southampton
+237789,581,30,Southampton
+17421,582,110.8833,Cherbourg
+28403,583,26,Southampton
+13049,584,40.125,Cherbourg
+3411,585,8.7125,Cherbourg
+110413,586,79.65,Southampton
+237565,587,15,Southampton
+13567,588,79.2,Cherbourg
+14973,589,8.05,Southampton
+A./5. 3235,590,8.05,Southampton
+STON/O 2. 3101273,591,7.125,Southampton
+36947,592,78.2667,Cherbourg
+A/5 3902,593,7.25,Southampton
+364848,594,7.75,Queenstown
+SC/AH 29037,595,26,Southampton
+345773,596,24.15,Southampton
+248727,597,33,Southampton
+LINE,598,0,Southampton
+2664,599,7.225,Cherbourg
+PC 17485,600,56.9292,Cherbourg
+243847,601,27,Southampton
+349214,602,7.8958,Southampton
+113796,603,42.4,Southampton
+364511,604,8.05,Southampton
+111426,605,26.55,Cherbourg
+349910,606,15.55,Southampton
+349246,607,7.8958,Southampton
+113804,608,30.5,Southampton
+SC/Paris 2123,609,41.5792,Cherbourg
+PC 17582,610,153.4625,Southampton
+347082,611,31.275,Southampton
+SOTON/O.Q. 3101305,612,7.05,Southampton
+367230,613,15.5,Queenstown
+370377,614,7.75,Queenstown
+364512,615,8.05,Southampton
+220845,616,65,Southampton
+347080,617,14.4,Southampton
+A/5. 3336,618,16.1,Southampton
+230136,619,39,Southampton
+31028,620,10.5,Southampton
+2659,621,14.4542,Cherbourg
+11753,622,52.5542,Southampton
+2653,623,15.7417,Cherbourg
+350029,624,7.8542,Southampton
+54636,625,16.1,Southampton
+36963,626,32.3208,Southampton
+219533,627,12.35,Queenstown
+13502,628,77.9583,Southampton
+349224,629,7.8958,Southampton
+334912,630,7.7333,Queenstown
+27042,631,30,Southampton
+347743,632,7.0542,Southampton
+13214,633,30.5,Cherbourg
+112052,634,0,Southampton
+347088,635,27.9,Southampton
+237668,636,13,Southampton
+STON/O 2. 3101292,637,7.925,Southampton
+C.A. 31921,638,26.25,Southampton
+3101295,639,39.6875,Southampton
+376564,640,16.1,Southampton
+350050,641,7.8542,Southampton
+PC 17477,642,69.3,Cherbourg
+347088,643,27.9,Southampton
+1601,644,56.4958,Southampton
+2666,645,19.2583,Cherbourg
+PC 17572,646,76.7292,Cherbourg
+349231,647,7.8958,Southampton
+13213,648,35.5,Cherbourg
+S.O./P.P. 751,649,7.55,Southampton
+CA. 2314,650,7.55,Southampton
+349221,651,7.8958,Southampton
+231919,652,23,Southampton
+8475,653,8.4333,Southampton
+330919,654,7.8292,Queenstown
+365226,655,6.75,Queenstown
+S.O.C. 14879,656,73.5,Southampton
+349223,657,7.8958,Southampton
+364849,658,15.5,Queenstown
+29751,659,13,Southampton
+35273,660,113.275,Cherbourg
+PC 17611,661,133.65,Southampton
+2623,662,7.225,Cherbourg
+5727,663,25.5875,Southampton
+349210,664,7.4958,Southampton
+STON/O 2. 3101285,665,7.925,Southampton
+S.O.C. 14879,666,73.5,Southampton
+234686,667,13,Southampton
+312993,668,7.775,Southampton
+A/5 3536,669,8.05,Southampton
+19996,670,52,Southampton
+29750,671,39,Southampton
+F.C. 12750,672,52,Southampton
+C.A. 24580,673,10.5,Southampton
+244270,674,13,Southampton
+239856,675,0,Southampton
+349912,676,7.775,Southampton
+342826,677,8.05,Southampton
+4138,678,9.8417,Southampton
+CA 2144,679,46.9,Southampton
+PC 17755,680,512.3292,Cherbourg
+330935,681,8.1375,Queenstown
+PC 17572,682,76.7292,Cherbourg
+6563,683,9.225,Southampton
+CA 2144,684,46.9,Southampton
+29750,685,39,Southampton
+SC/Paris 2123,686,41.5792,Cherbourg
+3101295,687,39.6875,Southampton
+349228,688,10.1708,Southampton
+350036,689,7.7958,Southampton
+24160,690,211.3375,Southampton
+17474,691,57,Southampton
+349256,692,13.4167,Cherbourg
+1601,693,56.4958,Southampton
+2672,694,7.225,Cherbourg
+113800,695,26.55,Southampton
+248731,696,13.5,Southampton
+363592,697,8.05,Southampton
+35852,698,7.7333,Queenstown
+17421,699,110.8833,Cherbourg
+348121,700,7.65,Southampton
+PC 17757,701,227.525,Cherbourg
+PC 17475,702,26.2875,Southampton
+2691,703,14.4542,Cherbourg
+36864,704,7.7417,Queenstown
+350025,705,7.8542,Southampton
+250655,706,26,Southampton
+223596,707,13.5,Southampton
+PC 17476,708,26.2875,Southampton
+113781,709,151.55,Southampton
+2661,710,15.2458,Cherbourg
+PC 17482,711,49.5042,Cherbourg
+113028,712,26.55,Southampton
+19996,713,52,Southampton
+7545,714,9.4833,Southampton
+250647,715,13,Southampton
+348124,716,7.65,Southampton
+PC 17757,717,227.525,Cherbourg
+34218,718,10.5,Southampton
+36568,719,15.5,Queenstown
+347062,720,7.775,Southampton
+248727,721,33,Southampton
+350048,722,7.0542,Southampton
+12233,723,13,Southampton
+250643,724,13,Southampton
+113806,725,53.1,Southampton
+315094,726,8.6625,Southampton
+31027,727,21,Southampton
+36866,728,7.7375,Queenstown
+236853,729,26,Southampton
+STON/O2. 3101271,730,7.925,Southampton
+24160,731,211.3375,Southampton
+2699,732,18.7875,Cherbourg
+239855,733,0,Southampton
+28425,734,13,Southampton
+233639,735,13,Southampton
+54636,736,16.1,Southampton
+W./C. 6608,737,34.375,Southampton
+PC 17755,738,512.3292,Cherbourg
+349201,739,7.8958,Southampton
+349218,740,7.8958,Southampton
+16988,741,30,Southampton
+19877,742,78.85,Southampton
+PC 17608,743,262.375,Cherbourg
+376566,744,16.1,Southampton
+STON/O 2. 3101288,745,7.925,Southampton
+WE/P 5735,746,71,Southampton
+C.A. 2673,747,20.25,Southampton
+250648,748,13,Southampton
+113773,749,53.1,Southampton
+335097,750,7.75,Queenstown
+29103,751,23,Southampton
+392096,752,12.475,Southampton
+345780,753,9.5,Southampton
+349204,754,7.8958,Southampton
+220845,755,65,Southampton
+250649,756,14.5,Southampton
+350042,757,7.7958,Southampton
+29108,758,11.5,Southampton
+363294,759,8.05,Southampton
+110152,760,86.5,Southampton
+358585,761,14.5,Southampton
+SOTON/O2 3101272,762,7.125,Southampton
+2663,763,7.2292,Cherbourg
+113760,764,120,Southampton
+347074,765,7.775,Southampton
+13502,766,77.9583,Southampton
+112379,767,39.6,Cherbourg
+364850,768,7.75,Queenstown
+371110,769,24.15,Queenstown
+8471,770,8.3625,Southampton
+345781,771,9.5,Southampton
+350047,772,7.8542,Southampton
+S.O./P.P. 3,773,10.5,Southampton
+2674,774,7.225,Cherbourg
+29105,775,23,Southampton
+347078,776,7.75,Southampton
+383121,777,7.75,Queenstown
+364516,778,12.475,Southampton
+36865,779,7.7375,Queenstown
+24160,780,211.3375,Southampton
+2687,781,7.2292,Cherbourg
+17474,782,57,Southampton
+113501,783,30,Southampton
+W./C. 6607,784,23.45,Southampton
+SOTON/O.Q. 3101312,785,7.05,Southampton
+374887,786,7.25,Southampton
+3101265,787,7.4958,Southampton
+382652,788,29.125,Queenstown
+C.A. 2315,789,20.575,Southampton
+PC 17593,790,79.2,Cherbourg
+12460,791,7.75,Queenstown
+239865,792,26,Southampton
+CA. 2343,793,69.55,Southampton
+PC 17600,794,30.6958,Cherbourg
+349203,795,7.8958,Southampton
+28213,796,13,Southampton
+17465,797,25.9292,Southampton
+349244,798,8.6833,Southampton
+2685,799,7.2292,Cherbourg
+345773,800,24.15,Southampton
+250647,801,13,Southampton
+C.A. 31921,802,26.25,Southampton
+113760,803,120,Southampton
+2625,804,8.5167,Cherbourg
+347089,805,6.975,Southampton
+347063,806,7.775,Southampton
+112050,807,0,Southampton
+347087,808,7.775,Southampton
+248723,809,13,Southampton
+113806,810,53.1,Southampton
+3474,811,7.8875,Southampton
+A/4 48871,812,24.15,Southampton
+28206,813,10.5,Southampton
+347082,814,31.275,Southampton
+364499,815,8.05,Southampton
+112058,816,0,Southampton
+STON/O2. 3101290,817,7.925,Southampton
+S.C./PARIS 2079,818,37.0042,Cherbourg
+C 7075,819,6.45,Southampton
+347088,820,27.9,Southampton
+12749,821,93.5,Southampton
+315098,822,8.6625,Southampton
+19972,823,0,Southampton
+392096,824,12.475,Southampton
+3101295,825,39.6875,Southampton
+368323,826,6.95,Queenstown
+1601,827,56.4958,Southampton
+S.C./PARIS 2079,828,37.0042,Cherbourg
+367228,829,7.75,Queenstown
+113572,830,80,
+2659,831,14.4542,Cherbourg
+29106,832,18.75,Southampton
+2671,833,7.2292,Cherbourg
+347468,834,7.8542,Southampton
+2223,835,8.3,Southampton
+PC 17756,836,83.1583,Cherbourg
+315097,837,8.6625,Southampton
+392092,838,8.05,Southampton
+1601,839,56.4958,Southampton
+11774,840,29.7,Cherbourg
+SOTON/O2 3101287,841,7.925,Southampton
+S.O./P.P. 3,842,10.5,Southampton
+113798,843,31,Cherbourg
+2683,844,6.4375,Cherbourg
+315090,845,8.6625,Southampton
+C.A. 5547,846,7.55,Southampton
+CA. 2343,847,69.55,Southampton
+349213,848,7.8958,Cherbourg
+248727,849,33,Southampton
+17453,850,89.1042,Cherbourg
+347082,851,31.275,Southampton
+347060,852,7.775,Southampton
+2678,853,15.2458,Cherbourg
+PC 17592,854,39.4,Southampton
+244252,855,26,Southampton
+392091,856,9.35,Southampton
+36928,857,164.8667,Southampton
+113055,858,26.55,Southampton
+2666,859,19.2583,Cherbourg
+2629,860,7.2292,Cherbourg
+350026,861,14.1083,Southampton
+28134,862,11.5,Southampton
+17466,863,25.9292,Southampton
+CA. 2343,864,69.55,Southampton
+233866,865,13,Southampton
+236852,866,13,Southampton
+SC/PARIS 2149,867,13.8583,Cherbourg
+PC 17590,868,50.4958,Southampton
+345777,869,9.5,Southampton
+347742,870,11.1333,Southampton
+349248,871,7.8958,Southampton
+11751,872,52.5542,Southampton
+695,873,5,Southampton
+345765,874,9,Southampton
+P/PP 3381,875,24,Cherbourg
+2667,876,7.225,Cherbourg
+7534,877,9.8458,Southampton
+349212,878,7.8958,Southampton
+349217,879,7.8958,Southampton
+11767,880,83.1583,Cherbourg
+230433,881,26,Southampton
+349257,882,7.8958,Southampton
+7552,883,10.5167,Southampton
+C.A./SOTON 34068,884,10.5,Southampton
+SOTON/OQ 392076,885,7.05,Southampton
+382652,886,29.125,Queenstown
+211536,887,13,Southampton
+112053,888,30,Southampton
+W./C. 6607,889,23.45,Southampton
+111369,890,30,Cherbourg
+370376,891,7.75,Queenstown

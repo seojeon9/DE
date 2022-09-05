@@ -1,0 +1,157 @@
+export PATH=$PATH:$JAVA_HOME/bin
+export PATH=$HADOOP_HOME/bin:$PATH
+export PATH=$HADOOP_HOME/sbin:$PATH
+: spark에도 start-all.sh이 파일이 있어 spark가 올라갈 수 있음
+그래서 hadoop의 path를 제일 먼저 올리기 위해 경로를 변경
+
+<주피터 화면 이쁘게 꾸미기>
+
+mkdir ~/.local/share/fonts
+cd ~/.local/share/fonts
+wget https://github.com/naver/d2codingfont/releases/download/VER1.3.2/D2Coding-Ver1.3.2-20180524.zip
+unzip D2Coding-Ver1.3.2-20180524.zip
+sudo apt install fontconfig
+fc-list | grep "D2Coding"  # 운영체제에 설치된 font확인
+fc-cache -v		# font 캐싱
+rm -rf D2Coding-Ver1.3.2-20180524.zip
+
+cd ~/.jupyter
+mkdir custom
+cd custom
+vim custom.css
+
+# css 파일 생성
+div.CodeMirror,
+div.CodeMirror pre {
+ font-family: D2Coding;
+ font-size: 18pt;
+ line-height: 140%;
+} /* 코드 입력창 */
+
+.output_result pre {
+  font-family: D2Coding;
+  font-size: 16pt;
+  line-height: 120%;
+} /* 출력 결과 */
+
+.output_stdout pre {
+  font-family: D2Coding;
+  font-size: 16pt;
+  line-height: 120%;
+} /* 출력 결과 */
+
+.text_cell_render {
+  font-family: D2Coding;
+  font-size: 12pt;
+} /* 마크 다운 */
+
+.CodeMirror-lines{
+  font-family: D2Coding;
+  font-size: 12pt;
+}
+
+table.dataframe {
+  font-family: D2Coding;
+  font-size: 12pt;
+} /* DataFrame 출력 결과 */
+
+# Mount
+docker run -it `
+--name scluster `
+-h localhost `
+-p 18080:18080 `
+-p 9870:9870 `
+-p 9864:9864 `
+-p 8081:8081 `
+-v C:\CODE\DE\spark:/home/big/study `
+seojeon9/scluster:1.1
+
+
+==================================================
+su big
+sudo service ssh start
+start-all.sh
+pyspark --master yarn
+
+주피터 kernel연결이 되는데 시간이 좀 걸림 기다려줘야하고
+연결되어 있는 파일은 하나만 있도록 유지!
+
+===================================================
+# 로그레벨 변경하기
+cd spark/conf
+big@localhost:~/spark/conf$ cp log4j.properties.template log4j.properties
+# Set everything to be logged to the console
+log4j.rootCategory=ERROR, console
+log4j.appender.console=org.apache.log4j.ConsoleAppender
+log4j.appender.console.target=System.err
+log4j.appender.console.layout=org.apache.log4j.PatternLayout
+log4j.appender.console.layout.ConversionPattern=%d{yy/MM/dd HH:mm:ss} %p %c{1}: %m%n
+
+# Set the default spark-shell/spark-sql log level to WARN. When running the
+# spark-shell/spark-sql, the log level for these classes is used to overwrite
+# the root logger's log level, so that the user can have different defaults
+# for the shell and regular Spark apps.
+log4j.logger.org.apache.spark.repl.Main=ERROR
+log4j.logger.org.apache.spark.sql.hive.thriftserver.SparkSQLCLIDriver=ERROR
+
+# Settings to quiet third party logs that are too verbose
+log4j.logger.org.sparkproject.jetty=ERROR
+log4j.logger.org.sparkproject.jetty.util.component.AbstractLifeCycle=ERROR
+log4j.logger.org.apache.spark.repl.SparkIMain$exprTyper=ERROR
+log4j.logger.org.apache.spark.repl.SparkILoop$SparkILoopInterpreter=ERROR
+log4j.logger.org.apache.parquet=ERROR
+log4j.logger.parquet=ERROR
+
+===================================================
+big@localhost:/$ hdfs dfs -chmod -R 777 /
+-R : 하위폴더도 포함
+
+===================================================
+도커의 Vmmem 이란 친구가 memory를 엄청 잡아먹음
+-> 켜 있는시간이 길 수록 더더 늘어남. 현재 도커의 문제점
+그래서 도커의 메모리잡아먹을 수 있는 한계를 둘거임
+(955MB) 
+시간은 더 오래걸리겠지만 컴퓨터가 가지는 부담이 줄어듦
+
+(도커 컨테이너 끄면 73% 도커 키면 87%정도!)
+
+docker run -it `
+--name scluster `
+-h localhost `
+-p 18080:18080 `
+-p 9870:9870 `
+-p 9864:9864 `
+-p 8081:8081 `
+-v C:\CODE\DE\spark:/home/big/study `
+--cpus=0.7 `
+--memory="4g" `
+seojeon9/scluster:1.1
+
+==============================================
+
+spark 활용 문법
+sc.parallelize(list)
+.flatmap()
+.map
+.filter
+
+nlist.zip(mlist)
+.distinct()
+.reduceByKey()
+.mapValues()
+.sortBy()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
