@@ -1,0 +1,41 @@
+※ 이슈 Vmmem이 memory를 5기가씩 잡아먹음ㅎㅎ
+https://ralpioxxcs.github.io/post/wslconfig/
+: 
+pro가 아니여서 하이퍼바이저를 사용하지 못하고 wsl2기반으로 리눅스를 돌리고 있는 경우 해당 문제가 발생할 수 있는데
+wsl2가 가져가는 메모리를 강제로 지정할 수 있는 방법이 있음
+도커가 리눅스 기반이라 하이퍼바이저가 안되시는 분들은 wsl2이슈가 터지는 것 같음
+
+======================================================
+* spark transformation
+
+res = students.join(score_avg)
+
+* spark shuffle
+- action
+collect() : print
+take() : 정한 개수만큼 print
+takeOrdered() : 오름차순, 내림차순 정할 수 있음
+top() : 높은 값부터 print, key를 int,str 정할 수 있음
+countByValue() : 각 문자의 숫자를 세서 print
+reduce() : rdd를 돌면서 연산
+foreach() -> 제대로 작동을 안함
+saveAsTextFile() : hdfs에 알아서 파티션이 나눠서 저장됨
+=> 하지만 그 저장된 파일을 불러올때는 하나의 파일로 반환해줌
+max(), min(), mean(), variance(), stdev(), stats()
+
+*Broadcast Variables : 읽기 전용 변수
+*Accumulator : 누산기 함수
+
+*wordcloud
+
+*DataFrame
+schema = StructType([
+    StructField("name", StringType(),False),
+    StructField("age", IntegerType(),False),
+    StructField("birth", DateType(),False),
+    StructField("phone", StructType([
+        StructField("phone1", StringType(),False),
+        StructField("phone2", StringType(),False),
+        StructField("phone3", StringType(),False),
+    ]),False, metadata={'desc':'user phone number'}),
+])
