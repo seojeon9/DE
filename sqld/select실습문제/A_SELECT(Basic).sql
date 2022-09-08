@@ -7,6 +7,8 @@ select department_name || '의 정원은 ' || capacity || '입니다.' as "학과별 정원"
 from tb_department;
 
 -- 3.
+select department_no from tb_department where department_name = '국어국문학과';
+
 select student_name 
 from tb_student
 where department_no = '001' and absence_yn = 'Y' and student_ssn like '_______2______';
@@ -41,9 +43,16 @@ select distinct(category)
 from tb_department;
 
 -- 10.
-select student_no, student_name, student_ssn
+select student_no, student_name, student_ssn, entrance_date
 from tb_student
 where entrance_date like '02%' 
+    and absence_yn = 'N'
+    and student_address like '%전주%';
+    
+-- 강사
+select student_no, student_name, student_ssn, entrance_date
+from tb_student
+where entrance_date between '2002/01/01' and '2002/12/31' 
     and absence_yn = 'N'
     and student_address like '%전주%';
    
