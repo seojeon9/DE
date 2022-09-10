@@ -72,15 +72,27 @@ where emp_no like '7%'
 
 
 --9. 퇴사한 사람과 퇴사하지 않은 사람의 숫자를 출력하세요
-select
+select ent_yn, count(ent_yn)
+from employee
+group by ent_yn;
 
 
 --10. 자신의 매니저보다 급여가 더 높은 사원의 이름, 부서, 급여, 매니저 이름, 매니저 부서, 매니저 급여를 조회하시오
-
+select e.emp_name, ed.dept_title, e.salary, m.emp_name, md.dept_title, m.salary
+from employee e
+join employee m on(e.manager_id = m.emp_id)
+join department ed on (e.dept_code = ed.dept_id)
+join department md on (m.dept_code = md.dept_id)
+where e.salary > m.salary;
 
  
 --11. 부서가 위치한 국가별 평균 급여를 조회하시오, 
 --만약 해당 국가에 있는 부서가 존재하지 않더라도 국가 정보는 출력되도록 작성하시오
-
+select national_name, sum(salary)
+from national n
+left outer join location l using(national_code)
+left outer join department d on (l.local_code = d.location_id)
+left outer join employee e on(e.dept_code = d.dept_id)
+group by national_name;
 
 
