@@ -88,11 +88,19 @@ where e.salary > m.salary;
  
 --11. 부서가 위치한 국가별 평균 급여를 조회하시오, 
 --만약 해당 국가에 있는 부서가 존재하지 않더라도 국가 정보는 출력되도록 작성하시오
-select national_name, sum(salary)
+select national_name, avg(salary)
 from national n
 left outer join location l using(national_code)
 left outer join department d on (l.local_code = d.location_id)
 left outer join employee e on(e.dept_code = d.dept_id)
+group by national_name;
+
+----강사코드
+select national_name, avg(salary)
+from employee e
+right join department d on(e.dept_code = d.dept_id)
+right join location l on(d.location_id = l.local_code)
+join national using(national_code)
 group by national_name;
 
 

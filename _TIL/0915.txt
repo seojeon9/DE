@@ -1,0 +1,59 @@
+데이터 파이프라인 구축
+수집->저장->처리->탐색->분석->운영
+	전처리    |    후처리
+서비스 마다 서버가 분리돼서 사용되고 서버에서도 데이터베이스가 나눠서 사용되기 때문에
+data warehouse(오라클), data lake(하둡)가 필요
+
+ETL : 미리 가공해서 저장하기 대문에 첫 설계가 매우 중요. 이미 가공해버린 데이터는 없어지기 때문
+	모든 데이터를 변경해야 하기때문에 수집데이터의 양과 정비하는는데 필요한 비용이 비례
+ELT : 수집된 데이터를 우선 저장하고 필요에따라 정비하는 파이프라인
+	but 수집되는 모든 데이터를 저장할 수 있는 시스템 리소스가 필요함
+=> 요즘은 그냥 필요에 따라 ETL,ELT 섞어서 사용
+
+
+데이터 전문가 취업 가이드
+: https://catkin-chili-1de.notion.site/22-5-22-546996712bb24201978d56c327209823
+
+그런 REST API로 괜찮은가
+: https://www.youtube.com/watch?v=RP_f5dMoHFc&t=783s
+
+MDN Web document
+: https://developer.mozilla.org/ko/
+> HTTP 메시지, 헤더 정보있는 사이트
+
+==============================================
+
+docker run할때 윈도우의 위치랑 마운트 시켰음
+그래서 리눅스에서는 내가 저장한 파일을 가지고 있음
+그래서 얘를 가져다가 HDFS로 올릴거임
+
+/home/big/study/data/corona_data
+
+
+hdfs dfs -rm -r /corona_data/loc
+
+
+# 겪은 오류
+'_xsrf' argument missing from POST
+
+[W 14:58:34.206 NotebookApp] 403 PUT /api/contents/13_Extract.ipynb (172.17.0.1) 1.87ms referer=http://localhost:8081/notebooks/13_Extract.ipynb
+
+
+# 오류가 안뜨는 문제. 
+근데 소스코드의 문제는 아니고
+일시적으로 로깅을 못 찾은 듯
+logging.error(e) 하고 나니까
+잘 찾음
+
+
+===============================================
+https://ncv.kdca.go.kr/mainStatus.es?mid=a11702000000
+
+===============================================
+# jars경로 설정
+big@localhost:~/spark/conf$ cp spark-defaults.conf.template spark-defaults.conf
+big@localhost:~/spark/conf$ vim spark-defaults.conf
+
+spark.driver.extraClassPath /home/big/study/db/ojdbc8.jar:/home/big/study/db/oraclepki-21.jar:/home/big/study/db/osdt_cert-21.jar:/home/big/study/db/osdt_core-21.jar:/home/big/study/db/ucp.jar
+spark.jars /home/big/study/db/ojdbc8.jar,/home/big/study/db/oraclepki-21.jar,/home/big/study/db/osdt_cert-21.jar,/home/big/study/db/osdt_core-21.jar,/home/big/study/db/ucp.jar
+
