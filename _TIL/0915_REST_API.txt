@@ -1,0 +1,58 @@
+https://www.youtube.com/watch?v=RP_f5dMoHFc&t=783s
+
+REST API : REST 아키텍처 스타일을 따르는 API
+REST : 분산 하이퍼미디어 시스템(예:웹)을 위한 아키텍처 스타일
+아키텍처 스타일 : 제약조건의 집합
+
+REST를 구성하는 스타일
+- client-server
+- statrless
+- cache
+- uniform interface
+- layered system
+- code-on-demand (optional)
+
+*uniform interface의 제약조건
+- identifiaction of resources
+- manipulation of resources through representations
+- self-descriptive messages : 메시지는 스스로를 설명해야한다
+- hypermedia as the engine of applcation state (HATEOAS)
+: 애플리케이션의 상태는 Hyperlink를 이용해 전이되어야 한다.
+
+=> 독립적 진화
+- 서버와 클라아언트가 각각 독집적으로 진화한다.
+- 서버의 기능이 변경되어도 클라이언트를 업데이트할 필요가 없다.
+- RESR를 만들게 된 계기 : "How do I improve HTTP without breaking the web."
+
+***원격 API가 꼭 REST API여야 하는건가?***
+=> 아니다
+"시스템 전체를 통제할 수 있다고 생각하거나, 진화에 관심이 없다면, REST에 대해 따지느라 시간을 낭비하지 마라"
+
+==================================================
+웹은 REST가 가능한데 API는 REST가 왜 어려운가
+HTML은  a태그 사용으로 Hyperlink 되지만 JSON은 정의x
+HTML은 HTML명세를 통해 self-descriptive가 되지만 
+JSON은 문법 해석은 가능하지만 각 파싱된 값들의 정의가 불완전함
+그래서 의미를 해석하려면 별도로 문서가(API문서 등) 필요함. 
+
+self-descriptive
+방법1. Media type
+: IANA에 문서를 미디어 타입의 명세로 등록한다.
+방법2. Profile
+: Link 헤더에 profile relation으로 해당 명세를 링크한다.
+
+HATEOAS
+방법1. data에 다양한 방법으로 하이퍼링크를 표현한다.
+방법2. HTTP헤더로 Link, Location등의 헤더로 표현한다.
+
+정리
+오늘날 대부분의 "REST API"는 사실 REST를 따르지 않고 있다.
+REST의 제약조건 중에서 특히 SELF-desciptive와 HATEOAS를 잘 만족하지 못한다.
+REST는 긴 시간에 걸쳐 진화하는 웹 애플리케이션을 위한 것이다.
+REST를 따를 것인지는 API를 설계하는 이들이 스스로 판단하여 결정해야한다.
+REST를 따르겠다면, Self-desciptive와 HATEOAS를 만족시켜야 한다.
+- Self-desciptive 는 suctom media type이나 profile link relation등으로 만족시킬 수 있다.
+- HATEOAS는 HTTP 헤더나 본문에 링크를 담아 만족시킬 수 있다.
+REST를 따르지 않겠다면, "REST를 만족하지 않는 REST API"를 뭐라고 부를지 결정해야한다.
+- HTTP API라고 부를 수도 있고
+- 그냥 이대로 REAT API라고 부를 수도 있다 (roy가 싫어합니다.)
