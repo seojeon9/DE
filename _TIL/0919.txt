@@ -1,0 +1,144 @@
+아침부터 도커 데스크탑이 안켜지는 문제 발생
+한시간동안 안켜져서 그냥 vscode로 켜서 코드만 따라하고 있었는데
+쉬는시간 돼서 컴터 껏다키니 바로 됨,,,
+오빠의 조언 스고이
+이제 원래 돼야하는게 잘 안된다?
+이러면 
+1. 컴터를 껏다키고
+2. 해당 프로그램을 다시 설치(삭제할 필요는 없고 인스톨러를 한번더 실행)
+하라고 한다
+이 콤보면 안될게 없다구^*^
+
+====================================================
+언어를 처음 시작할때
+보일러 플레이트(boilerplate) / 프레임워크
+찾아보기
+
+지금 우리가 하려고 하는거는 pyspark ETL 프로젝트
+boilerplate 검색해서 다른 사람이 한거 참고하면
+도움이 될거임
+
+=====================================================
+
+** 본격적으로 etl 파이프 라인 시작!!**
+
+docker run -it `
+--name corona_etl `
+-h localhost `
+-p 18080:18080 `
+-p 9870:9870 `
+-p 9864:9864 `
+-p 8081:8081 `
+-p 8082:8082 `
+-v C:\code\DE\spark:/home/big/study `
+--cpus 0.8 `
+seojeon9/scluster:1.2
+
+# memory 4기가로 제한하면 에어플로우 이미 4기가를 넘어버리기 때문에 안될거라고 하심
+# 그래서 일단은 memory 제한 옵션 없이 컨테이너 만들어보자
+
+
+# 이제 스파크를 주피터 말고 스파크 shell로 할거임 -> 설정 시작
+
+vim ~/.bashrc
+#export PYSPARK_DRIVER_PYTHON=jupyter
+#export PYSPARK_DRIVER_PYTHON_OPTS='notebook'
+해당 코드 주석 처리
+
+cd spark/conf
+vim spark-env.sh
+export PYSPARK_PYTHON=/usr/bin/python3
+export PYSPARK_DRIVER_PYTHON=/usr/bin/python3
+해당 코드 주석 해제
+
+source ~/.bashrc
+
+docker run -it `
+--name corona_etl `
+-h localhost `
+-p 18080:18080 `
+-p 9870:9870 `
+-p 9864:9864 `
+-p 8081:8081 `
+-p 8082:8082 `
+-v C:\code\DE:/home/big/study `
+seojeon9/corona_etl:1.0
+
+# 근데 cpu 옵션도 빼서 다시 run
+
+
+### vscode 원격
+# 폴더 만들기
+infra
+datajob
+log
+tests
+
+
+# 파일만들기 > infra안에
+hdfs_client.py
+
+def get_clients():
+	return InsecureClient('http://localhost:9870', user='big')
+
+jdbc.py
+
+class DataWarehouse(Enum):
+	JDBC = {
+    'url':'jdbc:oracle:thin:@decorona_high?TNS_ADMIN=/home/big/study/db/Wallet_DECORONA',
+    'props':{
+        'user':'dw_admin',
+        'password':'123qwe!@#QWE'
+    }
+}
+
+
+
+# pylint사용할건데 얘네가 잔소리가 너무 심함
+
+F1 눌러서 setting.json Open Workspace
+
+{
+    "python.linting.pylintArgs": [
+        "--init-hook",
+        "--rcfile",
+        "pylint.config",
+        "--disable",
+        "missing-docstring",
+        "import sys; sys.path.append('/home/big/study/CORONA_ETL')"
+    ]
+}
+
+
+# pylint.config 만들어서
+[MESSAGES CONTROL] 
+#C0111 Missing docstring 
+#C0103 Invalid constant name 
+#C0301 Line too long 
+#C0303 trailing whitespace 
+disable=C0111,C0103,C0303,C0301
+
+====================================================
+주피터로 작성한 코드 파이썬으로 옮겨 적기
+
+# 실행
+python3 -W ignore -m unittest tests.extractor_test
+
+big@localhost:~/study$ sudo chmod -R 777 corona_etl
+
+
+# 오류
+AttributeError: module 'tests' has no attribute 'extractor_test'
+tests안에 'extractor_test'가 잘 있는데도 자꾸 못찾겠다 해서
+왜 그렇지 감을 못잡았는데
+tests폴더가 잘 있지만 test.py파일이 있어서 얘를 우선으로 잡아서 그런듯.
+그래서 tests.py파일을 지워줬더니 잘 해결이 되었다.
+
+# 리팩터링
+ctrl shift r : 손쉽게 리팩토링 할 수 있음
+
+========================================================
+# 에러, 경고 나는거 잡으려고 setting.json 수정했는데 안먹어서
+# path잡아주는 명령어 추가
+pylint --generate-rcfile > .pylintrc
+

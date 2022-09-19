@@ -1,0 +1,10 @@
+{
+    "python.linting.pylintArgs": [
+        "--init-hook",
+        "--rcfile",
+        "pylint.config",
+        "--disable",
+        "missing-docstring",
+        "import sys; sys.path.append('/home/big/study/CORONA_ETL')"
+    ]
+}
