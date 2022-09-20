@@ -140,5 +140,6 @@ ctrl shift r : 손쉽게 리팩토링 할 수 있음
 ========================================================
 # 에러, 경고 나는거 잡으려고 setting.json 수정했는데 안먹어서
 # path잡아주는 명령어 추가
+pip install pylint
 pylint --generate-rcfile > .pylintrc
 
