@@ -77,6 +77,8 @@ big@localhost:~/airflow$ airflow db reset
 airflow webserver --port 8082
 airflow scheduler
 # 에러플로우 정상작동 안됨 이따 한번 보기
+=> 진행도 하지 않고 별 로그도 남기지 않고 자꾸 실패해서
+강사코드랑 비교해보니 cwd를 /home/... 해야하는데 home/... 해서 경로를 처음부터 못 찾은거 같음
 
 ========================================
 docker run -it `
@@ -133,3 +135,19 @@ python3 manage.py inspectdb > rest_api/models.py
 # https://www.django-rest-framework.org/api-guide/schemas/#generating-an-openapi-schema
 # https://drf-yasg.readthedocs.io/en/stable/readme.html
 # https://drf-yasg.readthedocs.io/en/stable/custom_spec.html?highlight=swagger_auto_schema#the-swagger-auto-schema-decorator
+
+=================================================
+# 부트스트랩 적용안되는 이슈
+[21/Sep/2022 16:25:04] "GET /static/%20rest_framework/css/prettify.css HTTP/1.1" 404 1857
+[21/Sep/2022 16:25:04] "GET /static/%20rest_framework/css/default.css HTTP/1.1" 404 1854
+[21/Sep/2022 16:25:05] "GET /static/%20rest_framework/css/bootstrap.min.css HTTP/1.1" 404 1872
+[21/Sep/2022 16:25:05] "GET /static/%20rest_framework/css/bootstrap-tweaks.css HTTP/1.1" 404 1881
+: 크롬 에러
+
+※ 해결
+<link rel="stylesheet" type="text/css" href="{% static "rest_framework/css/prettify.css" %}" />
+이게 저장하면 자동 정렬해주면서 
+<link rel="stylesheet" type="text/css" href="{% static " rest_framework/css/prettify.css" %}" />
+앞의 공백을 만듦
+<link rel="stylesheet" type="text/css" href="{% static 'rest_framework/css/prettify.css' %}" />
+이렇게 바꿔주니까 무사히 검색함

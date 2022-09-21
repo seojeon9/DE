@@ -1,10 +1,9 @@
 from django.urls import include, path
 from rest_framework import routers
 from rest_api import views as rest_view
-from . import views
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
-
+from . import views
 
 router = routers.DefaultRouter()
 router.register(r'corona/facility', rest_view.CoFacilityViewSet)
@@ -28,4 +27,5 @@ urlpatterns = [
     path('', include(router.urls)),
     path('account/', include('account.urls')),
     path('doc/', schema_view.with_ui('swagger', cache_timeout=0), name='doc'),
+
 ]
