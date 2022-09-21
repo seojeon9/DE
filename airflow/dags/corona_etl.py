@@ -28,27 +28,28 @@ with DAG(
     # t1, t2 and t3 are examples of tasks created by instantiating operators
     t1 = BashOperator(
         task_id='extract_corona_api',
-        cwd='home/big/study/corona_etl',
+        cwd='/home/big/study/corona_etl',
         bash_command='python3 main.py extract corona_api',
     )
 
     t2 = BashOperator(
         task_id='extract_corona_vaccine',
-        cwd='home/big/study/corona_etl',
+        cwd='/home/big/study/corona_etl',
         bash_command='python3 main.py extract corona_vaccine',
     )
 
     t3 = BashOperator(
         task_id='transform_execute',
-        cwd='home/big/study/corona_etl',
+        cwd='/home/big/study/corona_etl',
         bash_command='python3 main.py transform execute',
     )
 
     t4 = BashOperator(
         task_id='datamart_execute',
-        cwd='home/big/study/corona_etl',
+        cwd='/home/big/study/corona_etl',
         bash_command='python3 main.py datamart execute',
     )
+
     t1.doc_md = dedent(
         """\
     #### Task Documentation
