@@ -1,0 +1,135 @@
+# su big하지 않고 바로 big계정으로 들어갈 수 있게 설정 변경!
+vim ~/.bashrc
+export PATH=/home/big/.local/bin:$PATH
+docker commit corona_etl seojeon9/corona_etl:1.1
+
+docker run -it `
+--name corona_etl `
+-h localhost `
+-u big `
+-p 18080:18080 `
+-p 9870:9870 `
+-p 9864:9864 `
+-p 8081:8081 `
+-p 8082:8082 `
+--cpus 0.8 `
+-v C:\CODE\DE:/home/big/study `
+seojeon9/corona_etl:1.1
+
+※ 에러 발생
+vscode-remote://attached-container+7b22636f6e7461696e65724e616d65223a222f636f726f6e615f65746c227d/home/big/study/corona_etl/datajob/datamart/co_vaccine.py'(NoPermissions (FileSystemError): Error: EACCES: permission denied,
+* https://code-hoon.tistory.com/177
+sudo chown -R big /home/big/study : 접속자에게 권한 할당을 주어 파일을 수정할 수 있게 해줌 -> 일단 이거 취소
+sudo chmod -R 777 study
+※ 에러 발생
+익스텐션이 깔리지 않으며 아래의 에러가 발생
+1. Corrupt ZIP: end of central directory record signature not found
+2. 이 확장은 원격 확장 호스트에서 실행되도록 정의되었기 때문에 이 작업 영역에서 사용하지 않도록 설정되어 있습니다. 사용하도록 설정하려면 'Container seojeon9/corona_etl:1.1 (corona_etl)'에 확장 프로그램을 설치하세요 => python확장자 설치 누르면 해당 경고가 뜸
+
+=> 컴퓨터 껏다키니까 언제 그랬냐는듯이 아주 잘 설치됨^^
+도커를 껏다켜서 권한주고 이런 설정들이 정리가 된건지,,, 컴퓨터를 다시 켜서 그런지,,,
+여튼 잘 해결 됨^*^
+==================================================
+# 데이터 원하는 파일 형식으로 추출
+sqld > 테이블 > 익스포트 > 형식(.csv) > 별도의 파일 => 파일 추출 완료
+==================================================
+# airflow
+mkdir airflow
+# https://airflow.apache.org/docs/apache-airflow/stable/start.html
+
+export AIRFLOW_HOME=~/airflow
+
+AIRFLOW_VERSION=2.4.0
+
+PYTHON_VERSION="$(python3 --version | cut -d " " -f 2 | cut -d "." -f 1-2)"
+
+CONSTRAINT_URL="https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${PYTHON_VERSION}.txt"
+
+pip install "apache-airflow==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}"
+
+airflow db init
+
+airflow users create \
+    --username admin \
+    --firstname seojeong \
+    --lastname Lee \
+    --role Admin \
+    --email underloose18@gmail.com
+
+airflow webserver --port 8082
+
+airflow scheduler
+
+cd airflow
+big@localhost:~/airflow$ ls
+big@localhost:~/airflow$ vim airflow.cfg
+dags_folder = /home/big/study/airflow/dags
+default_timezone = Asia/Seoul
+load_examples = False
+
+
+mkdir airflow
+mkdir dags
+
+big@localhost:~/airflow$ airflow db reset
+
+========================================
+airflow webserver --port 8082
+airflow scheduler
+# 에러플로우 정상작동 안됨 이따 한번 보기
+
+========================================
+docker run -it `
+--name corona_rest `
+-h localhost `
+-u big `
+-p 8000 `
+-v C:\CODE\DE:/home/big/study `
+seojeon9/corona_etl:1.2
+
+# corona_rest.pdf 보며 따라하기
+관련 링크 https://blogs.oracle.com/opal/post/connecting-to-oracle-cloud-autonomous-database-with-django#connect
+
+cd /usr/lib
+sudo wget https://download.oracle.com/otn_software/linux/instantclient/1916000/instantclient-basic-linux.x64-19.16.0.0.0dbru.zip
+sudo unzip instantclient-basic-linux.x64-19.16.0.0.0dbru.zip
+sudo cp /home/big/study/db/Wallet_DECORONA/* /usr/lib/instantclient_19_16/network/admin/
+
+sudo apt install libaio1
+sudo sh -c "echo /usr/lib/instantclient_19_16> /etc/ld.so.conf.d/oracle-instantclient.conf"
+sudo ldconfig
+pip install cx_Oracle
+
+# 환경변수 등록
+export LD_LIBRARY_PATH=/usr/lib/instantclient_19_16:$LD_LIBRARY_PATH
+export TNS_ADMIN=/usr/lib/instantclient_19_16/network/admin
+export PATH=/usr/lib/instantclient_19_16:$PATH
+
+============================================
+# django로 앱 만들기
+pip install django
+django-admin startproject app .
+django-admin startapp rest_api
+
+# settings.py
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.oracle',
+        'NAME': 'decorona_high',  # tnsnames.ora 파일에 등록된 NAME을 등록
+        'USER': 'dm_admin',
+        'PASSWORD': '123qwe!@#QWE',  # Please provide the db password here
+    }
+}
+
+python3 manage.py inspectdb > rest_api/models.py
+
+
+
+# Django REST framework
+ https://www.django-rest-framework.org/tutorial/quickstart/
+
+
+# https://www.django-rest-framework.org/topics/documenting-your-api/
+# https://www.django-rest-framework.org/api-guide/schemas/#generating-an-openapi-schema
+# https://drf-yasg.readthedocs.io/en/stable/readme.html
+# https://drf-yasg.readthedocs.io/en/stable/custom_spec.html?highlight=swagger_auto_schema#the-swagger-auto-schema-decorator

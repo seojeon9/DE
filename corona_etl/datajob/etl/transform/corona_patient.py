@@ -6,13 +6,13 @@ from infra.util import cal_std_day
 
 class CoronaPatientTrasformer:
 
-    path = '/corona_data/patient/corona_patient_' + cal_std_day(1) + '.json'
-    co_patient_json = get_spark_session().read.json(path, encoding='UTF-8')
-
     @classmethod
     def transform(cls):
+        path = '/corona_data/patient/corona_patient_' + cal_std_day(1) + '.json'
+        co_patient_json = get_spark_session().read.json(path, encoding='UTF-8')
+
         # 코로나 감염자 데이터
-        data = cls.__crawling_corona_patients()
+        data = cls.__crawling_corona_patients(co_patient_json)
         patient_data = get_spark_session().createDataFrame(data)
         co_patients = cls.__generate_data(patient_data)
         save_data(DataWarehouse, co_patients, 'CORONA_PATIENTS')
@@ -27,9 +27,9 @@ class CoronaPatientTrasformer:
         return co_patients
 
     @classmethod
-    def __crawling_corona_patients(cls):
+    def __crawling_corona_patients(cls, co_patient_json):
         data = []
-        for r1 in cls.co_patient_json.select('items').toLocalIterator():
+        for r1 in co_patient_json.select('items').toLocalIterator():
             if not r1.items:
                 continue
             for r2 in r1.items:

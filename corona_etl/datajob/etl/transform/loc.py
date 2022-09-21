@@ -5,18 +5,19 @@ from pyspark.sql.functions import col, count
 
 class LocTransformer:
 
-    AREA = get_spark_session().read.csv(
-        '/corona_data/loc/sido_area.csv', encoding='CP949', header=True)
-    POPU = get_spark_session().read.csv(
-        '/corona_data/loc/sido_population.csv', encoding='CP949', header=True)
-    FACILITY = get_spark_session().read.csv(
-        '/corona_data/loc/전국다중이용시설.csv', encoding='CP949', header=True)
 
     @classmethod
     def transform(cls):
+        AREA = get_spark_session().read.csv(
+            '/corona_data/loc/sido_area.csv', encoding='CP949', header=True)
+        POPU = get_spark_session().read.csv(
+            '/corona_data/loc/sido_population.csv', encoding='CP949', header=True)
+        FACILITY = get_spark_session().read.csv(
+            '/corona_data/loc/전국다중이용시설.csv', encoding='CP949', header=True)
         # loc 데이터 저장
-        area_pop = cls.__join_area_popu()
-        fac_cnt = cls.__calc_fac_cnt()
+
+        area_pop = cls.__join_area_popu(AREA, POPU)
+        fac_cnt = cls.__calc_fac_cnt(FACILITY)
         area_pop_fac = cls.__join_area_fac(area_pop, fac_cnt)
         save_data(DataWarehouse, area_pop_fac, 'LOC')
 
@@ -26,15 +27,15 @@ class LocTransformer:
         return area_pop_fac
 
     @classmethod
-    def __calc_fac_cnt(cls):
-        fac_cnt = cls.FACILITY.groupBy(col('광역').alias(
+    def __calc_fac_cnt(cls, FACILITY):
+        fac_cnt = FACILITY.groupBy(col('광역').alias(
             'LOC')).agg(count('*').alias('FACILITY_CNT'))
 
         return fac_cnt
 
     @classmethod
-    def __join_area_popu(cls):
-        area_pop = cls.AREA.join(cls.POPU, on='loc')
+    def __join_area_popu(cls, AREA, POPU):
+        area_pop = AREA.join(cls.POPU, on='loc')
         area_pop = area_pop.select(col('loc').alias('LOC'), col(
             'area').alias('AREA'), col('total').alias('POPULATION'))
 

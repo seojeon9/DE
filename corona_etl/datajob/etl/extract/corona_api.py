@@ -31,6 +31,7 @@ class CoronaApiExtractor:
             except Exception as e:
                 log_dict = cls.__create_log_dict(params)
                 cls.__dump_log(log_dict, e)
+                raise e
 
     @classmethod
     def __upload_to_hdfs(cls, file_name, res):

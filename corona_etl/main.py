@@ -18,16 +18,29 @@ from datajob.datamart.co_vaccine import CoVaccine
 # transform과정의 경우 spark를 올리는데에 시간이 더 오래걸리기 때문에 직렬로 진행할거임
 # 하지만 extract=크롤링의 경우 병렬적으로 하는것이 더 유리함 -> 에어플로우로 개발
 
+
+def trasform_execute():
+    CoronaPatientTrasformer.transform()
+    CoronaVaccineTransformer.transform()
+
+
+def datamart_execute():
+    CoPopuDensity.save()
+    CoVaccine.save()
+
+
 works = {
     'extract': {
         'corona_api': CoronaApiExtractor.extract_data,
         'corona_vaccine': CoronaVaccineExtractor.extract_data
     },
     'transform': {
+        'execute': trasform_execute,
         'corona_patient': CoronaPatientTrasformer.transform,
         'corona_vaccine': CoronaVaccineTransformer.transform
     },
     'datamart': {
+        'execute': datamart_execute,
         'co_popu_density': CoPopuDensity.save,
         'co_vaccine': CoVaccine.save
     }
@@ -46,7 +59,7 @@ if __name__ == "__main__":
     if args[1] not in works.keys():
         raise Exception('첫번째 전달인자가 잘못 되었습니다.' + str(works.keys()))
 
-    if args[2] not in works[args[1].keys()]:
+    if args[2] not in works[args[1]].keys():
         raise Exception('두번째 전달인자가 잘못 되었습니다.' + str(works[args[1]].keys()))
 
     work = works[args[1]][args[2]]
