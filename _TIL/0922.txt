@@ -1,0 +1,48 @@
+https://join.slack.com/t/w1663809868-xep749926/shared_invite/zt-1ghl05d91-OZgZDI1KAwEeo9~0_lcHEg
+
+손지수 : s.zisu0417@gmail.com
+유승종 : dbtmdwhd17@gmail.com
+이상엽 : sy456486@gmail.com
+정현진 : jhj6740@gmail.com
+
+https://github.com/microsoft/vscode-python/blob/main/.gitignore
+======================================================
+cd /home/big/.local/lib/python3.8/site-packages
+cd drf_yasg
+: 기존에 제공하는 swagger-ui.html을 고대로 들고와서 내 앱에서 커스텀해서 실행시킬 수 있음
+
+# custom seb ui
+https://drf-yasg.readthedocs.io/en/stable/
+
+# django query set
+https://docs.djangoproject.com/en/4.1/ref/models/querysets/#date
+
+# view set 객체
+https://django-rest-framework-old-docs.readthedocs.io/en/latest/api-guide/viewsets
+https://www.django-rest-framework.org/api-guide/generic-views/
+
+# 문서 decorator 파라미터
+https://drf-yasg.readthedocs.io/en/stable/custom_spec.html?highlight=swagger_auto_schema#the-swagger-auto-schema-decorator
+
+
+================================================================
+해야할일
+주제정하기
+ETL파이프라인 구축
+api 서버
+수집한 데이터로 시각화
+
+docker run -it `
+--name de_project `
+-h localhost `
+-p 18080:18080 `
+-p 9870:9870 `
+-p 9864:9864 `
+-p 8081:8081 `
+-p 8082:8082 `
+-v C:\code\DE:/home/big/study `
+seojeon9/corona_etl:1.2
+
+===================================================================
+python select Lint > pylama
+
