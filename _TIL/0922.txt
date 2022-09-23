@@ -40,9 +40,11 @@ docker run -it `
 -p 9864:9864 `
 -p 8081:8081 `
 -p 8082:8082 `
--v C:\code\DE:/home/big/study `
-seojeon9/corona_etl:1.2
+-v C:\code\project:/home/big/study `
+seojeon9/scluster:1.2
 
+# -v옵션 : 데이터 볼륨을 설정
+호스트와 컨테이너의 디렉토리를 연결하여, 파일을 컨테이너에 저장하지 않고 호스트에 바로 저장합니다(마운트)
 ===================================================================
 python select Lint > pylama
 
