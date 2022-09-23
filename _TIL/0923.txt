@@ -1,0 +1,53 @@
+# de_project
+
+docker run -it `
+--name de_project `
+-h localhost `
+-p 18080:18080 `
+-p 9870:9870 `
+-p 9864:9864 `
+-p 8081:8081 `
+-p 8082:8082 `
+-v C:\code\project:/home/big/study `
+seojeon9/corona_etl:1.1
+
+Q) HDFS를 새로 팔 수는 없는건가요? 포트를 변경해야하는건가요?
+: HDFS의 파일의 경우 이미지가 기억을 하고 있는거임
+그래서 새로 컨테이너를 올려서 지워도 그 이미지는 기억을 하고 있기 때문에 상관 x
+port 9000의 경우 default이고 수정하고 싶은경우 core-site.xml에서 변경 가능
+어떤 포트들을 쓸 수 있는지 궁금하긴 한데 지금 당장 필요한건 아니니 일단 PASS
+
+
+# 이슈 HDFS의 파일 삭제 못하는 권한제한
+Permission denied: user=dr.who, access=ALL, inode="/corona_data/vaccine":big:supergroup:drwxr-xr-x
+=> 현재 HADOOP이 실행되고 있는 환경의 사용자 권한이 추가되지 않아 생기는 에러
+etc/hadoop/core-site.xml
+
+<property>
+  <name>hadoop.http.staticuser.user</name>
+  <value>current_user</value>
+</property>
+에 다음을 추가하고 재시작 => 응 안돼
+
+hdfs-Site.xm
+<property>
+  <name>dfs.permissions.enabled</name>
+  <value>false</value>
+</property>	=> 성공!
+
+Q) HDFS의 경우 localhost라서 개개인의 데이터가 다르게 저장될텐데
+ETL을 하나씩 하니까 그냥 각자 쓰는건지
+변경될때마다 이미지를 푸시해서 변경해야하는건지,,
+아니면 포트포워딩해야하는건지 궁금
+
+서버에 컨테이너를 올리고 같이 쓰는 방법이 있다. 하지만 주말에는 열리지 않고 로컬에서 작업하는 거보다 더 어려움
+그래서 로컬 호스트로 작업하되 정해진 파일데이터만 미리 넣어두고 구현하고자 하는 샘플데이터를 먼저 넣고 이미지 공유를 하고 각자 작업
+각자 extract 다르게해서 추출했겠지만 이 데이터는 어짜피 못 씀 조인을 할때 무결성 같은게 무너짐
+모든 사람이 ETL 프로덕트를 다 구축을 한 후에 (git으로는 계속 merge) 
+한 컴퓨터를 데이터 구축하는 용으로 쓰고 나머지 사람들은 rest api만들기 (airflow를 붙이든)
+다 돌리고 나면 발표하는 날 수집한 데이터 이미지를 올려서 다 가지고 간다.
+* 같은 곳에 있으면 같은 IP를 쓰고 있어서 포트포워딩이 쉬운데 각자 따로 있기 때문에 네트워크로 연결하기는 어려움(방화벽이나 다른 문제들로)
+
+
+# 이따 주제 정해지는거 보고 앱이랑 이미지 이름 정해서 커밋하기
+
