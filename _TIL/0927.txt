@@ -1,0 +1,13 @@
+docker run -it `
+--name de_project `
+-h localhost `
+-p 18080:18080 `
+-p 9870:9870 `
+-p 9864:9864 `
+-p 8081:8081 `
+-p 8082:8082 `
+-u big `
+-v C:\code\DE\project:/home/big/study `
+seojeon9/de_project:1.0
+
+python -w ignore -m unittest
