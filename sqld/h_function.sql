@@ -1,0 +1,111 @@
+-- CHAR
+-- 고정길이 문자열
+-- 컬럼크기 100 -> 길이가 10인 문자열을 추가시 -> 문자열의 길이가 100, 뒤는 공백으로 채워짐
+-- VARCHAR2
+-- 가변길이 문자열
+-- 컬럼길이 100 -> 길이가 10인 문자열을 추가시 -> 컬럼값의 길이가 10으로 맞춰짐
+
+-- 1. 문자 관련 함수
+-- LENGTH, LENGTHB, SUBSTR, INSTR, CONCAT, REPLACE, TRIM, LPAD, RPAD
+-- https://docs.oracle.com/cd/B28359_01/server.111/b28286/functions001.htm#SQLRF51174
+SELECT LENGTH('oracle') FROM DUAL; --> DUAL : 가상테이블
+SELECT LENGTH('오라클') FROM DUAL;
+SELECT LENGTHB('oracle') FROM DUAL;
+SELECT LENGTHB('oracle') FROM DUAL;
+
+SELECT SUBSTR('PCLASS', 2) FROM DUAL;
+SELECT SUBSTR('PCLASS', 2, 3) FROM DUAL;
+
+SELECT INSTR('AABAACAABBAA', 'B') FROM DUAL;
+SELECT INSTR('AABAACAABBAA', 'B', 4) FROM DUAL;
+SELECT INSTR('AABAACAABBAA', 'B', -1, 3) FROM DUAL;
+
+SELECT CONCAT('A','B') FROM DUAL;
+SELECT 'A'||'B' FROM DUAL;
+
+SELECT REPLACE('서울시 강남구 선릉동', '선릉동') FROM DUAL;
+SELECT REPLACE('서울시 강남구 선릉동', '선릉동', '역삼동') FROM DUAL;
+
+SELECT TRIM('    MULTICAMPUS                  ') FROM DUAL;
+SELECT TRIM(LEADING 'M' FROM 'MULTICAMPUS') FROM DUAL;
+SELECT TRIM(TRAILING 'S' FROM 'MULTICAMPUS') FROM DUAL;
+SELECT TRIM(BOTH 'M' FROM 'MULTICAMPUSM') FROM DUAL;
+
+SELECT LPAD(EMAIL, 20) FROM EMPLOYEE;
+SELECT LPAD(EMAIL, 20, '#') FROM EMPLOYEE;
+SELECT RPAD(EMAIL, 20, '#') FROM EMPLOYEE;
+
+-- EMPLOYEE 테이블에서 사원명과 주민번호를 조회하세요
+-- 단 주민번호는 생년월일과 '-' 까지만 보이게 하고 나머지 자리의 숫자들은 *로 바꾸어 출력하세요.
+SELECT EMP_NAME, CONCAT(SUBSTR(EMP_NO, 1, 7),'*******') EMP_NO FROM EMPLOYEE;
+SELECT EMP_NAME, RPAD(SUBSTR(EMP_NO, 1, 7), 14 ,'*') EMP_NO FROM EMPLOYEE;
+SELECT EMP_NAME, REPLACE(EMP_NO, SUBSTR(EMP_NO, 8),'*******') EMP_NO FROM EMPLOYEE;
+
+----------------------------------------------------------------------------------------
+-- 2. 숫자 처리 함수
+-- ABS, MOD, ROUND, FLOOR, TRUNC, CEIL
+
+
+----------------------------------------------------------------------------------------
+-- 3. 날짜 처리 함수
+-- SYSDATE, MONTHS_BETWEEN, ADD_MONTHS, EXTRACT
+-- SYSDATE : 시스템에 저장되어 있는 현재 날짜
+SELECT SYSDATE FROM DUAL;
+-- SYSTIMESTAMP - GMT : 표준시
+SELECT SYSTIMESTAMP FROM DUAL;
+-- LOCALTIMESTAMP
+SELECT LOCALTIMESTAMP FROM DUAL;
+
+-- MONTHS_BETWEEN
+-- 사원들의 근무개월수를 구해보도록 하자
+SELECT EMP_NAME, TRUNC(MONTHS_BETWEEN(SYSDATE, HIRE_DATE)) AS 근무개월수 FROM EMPLOYEE
+ORDER BY HIRE_DATE ASC;
+
+-- ADD_MONTHS
+SELECT EMP_NAME, HIRE_DATE, ADD_MONTHS(HIRE_DATE, 12) FROM EMPLOYEE;
+
+-- EXTRACT
+SELECT EMP_NAME,
+EXTRACT(YEAR FROM HIRE_DATE),
+EXTRACT(MONTH FROM HIRE_DATE),
+EXTRACT(DAY FROM HIRE_DATE)
+FROM EMPLOYEE;
+
+--------------------------------------------------------------------------------
+-- 4. 형변환 함수
+-- TO_CHAR
+-- TO_DATE
+SELECT TO_CHAR(SYSDATE, 'YEAR') FROM DUAL;
+SELECT TO_CHAR(SYSDATE, 'YYYY"년" MONTH') FROM DUAL;
+SELECT TO_CHAR(123456789, '9,999,999,999') FROM DUAL;
+SELECT TO_CHAR(10000, '$99999') FROM DUAL;
+SELECT TO_CHAR(10000, 'L99,999') FROM DUAL;
+
+-- 5. NULL처리 함수
+-- NULL : 아직 정해지지 않은 값
+-- NULL의 산술연산이나 비교연산의 결과는 NULL
+-- NULL의 논리연산
+SELECT * FROM EMPLOYEE
+WHERE BONUS > NULL OR EMP_ID = 202;
+
+-- NVL, NVL2, NULLIF
+-- NVL
+SELECT EMP_NAME, BONUS, NVL(BONUS,0) FROM EMPLOYEE;
+SELECT EMP_NAME, BONUS, NVL(DEPT_CODE,'무소속') FROM EMPLOYEE;
+
+-- NVL2
+-- EMPLOYEE 테이블에서 보너스가 NULL인 직원은 0.5 아닌 직원은 0.1
+SELECT EMP_NAME, BONUS, NVL2(BONUS, 0.5, 0.1) FROM EMPLOYEE;
+
+-- NULLIF
+SELECT NULLIF('1234','123') FROM DUAL;
+SELECT NULLIF('1234','1234') FROM DUAL;
+
+--------------------------------------------------------------------------------
+-- 6. 선택 함수 DECODE
+-- CASE WHEN THEN 기능을 하는 함수
+-- 주민등록번호 뒷자리의 앞자리가 홀수이면 남자, 짝수이면 여자로 표시하시오
+SELECT EMP_NAME, EMP_NO,
+DECODE(MOD(SUBSTR(EMP_NO, 8, 1),2),1,'남',0,'여')
+FROM EMPLOYEE;
+
