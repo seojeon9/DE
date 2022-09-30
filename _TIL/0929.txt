@@ -1,0 +1,10 @@
+** 이슈
+상엽님 깃 클론이 안되는 상황
+fatal: unable to access 'https://github.com/seojeon9/DE_MovieProject.git/': getaddrinfo() thread failed to start
+=> 해결 x
+
+TypeError: list indices must be integers or slices, not str
+
+팀장님, 지금까지 강사님이랑 계속 리눅스환경에서 크롬 깔고 크롬드라이버 설치해서 크롤링 하는 것을 시도해봤는데 그 환경에서는 도저히 크롤링이 되지가 않아서
+강사님께서 주신 대책이 도커는 올려 놓은 상태에서 작업은 윈도우 환경에서 진행하고
+그게 9870 포트와 마운트 되어 있으니까 거기서 9870포트로 쏴서 hdfs로 올리는 방안으로 변경
