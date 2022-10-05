@@ -1,0 +1,74 @@
+plotly.js
+https://plotly.com/javascript/line-and-scatter/
+
+# CDN
+<script src="https://cdn.plot.ly/plotly-2.14.0.min.js"></script>
+
+
+#################프로젝트 airflow붙이기
+docker pull jhjzmdk/movie_etl:1.1
+
+docker run -it `
+--name movie_etl `
+-u big `
+-h localhost `
+-p 18080:18080 `
+-p 9870:9870 `
+-p 9864:9864 `
+-p 8081:8081 `
+-p 8082:8082 `
+-v C:\CODE\DE\project:/home/big/study `
+jhjzmdk/movie_etl:1.1
+
+airflow webserver --port 8082
+http://localhost:8082
+id : admin
+pw : 1234
+
+airflow scheduler
+
+###################배포용 서버 putty
+# /corona_rest/app
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+proxy_set_header  X-Forwarded-Proto https;
+
+강사님 도커 받아서 cors/csh뭐시기 만 변경하면 된다.
+
+docker run -it `
+--name movie_rest `
+-u big `
+-h localhost `
+-p 18080:18080 `
+-p 9870:9870 `
+-p 9864:9864 `
+-p 8081:8081 `
+-p 8082:8082 `
+-v C:\CODE\DE\project:/home/big/study `
+seojeon9/movie_etl:1.1
+
+##################movie_rest app생성
+corona_rest보면서 따라하기
+sudo cp /home/big/study/db/Wallet_DEMOVIE/* /usr/lib/instantclient_19_16/network/admin/
+
+git pull origin master
+
+docker pull seojeon9/movie_rest:1.0
+
+docker run -it `
+--name movie_rest `
+-u big `
+-h localhost `
+-p 18080:18080 `
+-p 9870:9870 `
+-p 9864:9864 `
+-p 8081:8081 `
+-p 8082:8082 `
+-v 프로젝트 디렉토리:/home/big/study `
+seojeon9/movie_rest:1.0
+
+
+# 각 데이터마트 값을 호출 할 api만들기
+1. rest_api>serializer.py 사용하는 model 별 Serializer 클래스 생성
+2. rest_api>views.py에 ViewSet 작성
+3. app 모듈의 urls.py에 router를 사용해 url 및 viewSet 등록
+
