@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from account.forms import UserForm
 from django.contrib.auth import authenticate, login
 from rest_framework.authtoken.models import Token
+from django.views.decorators.csrf import csrf_exempt
 
 
 # Create your views here.
@@ -27,3 +28,15 @@ def signup(request):
 def get_apikey(request):
     token = Token.objects.get_or_create(user=request.user)
     return render(request, 'account/apikey.html', {'apikey': token[0]})
+
+
+@csrf_exempt
+def get_token(request):
+    params = json.loads(request.body)
+    user = authenticate(
+        username=params['username'], password=params['password'])
+    if not user:
+        return JsonResponse({"is_success": False})
+
+    token = Token.objects.get_or_create(user=user)
+    return JsonResponse({"is_success": True, "token": str(token[0]), "user": str(user)})
