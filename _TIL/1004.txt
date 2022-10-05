@@ -1,0 +1,159 @@
+https://www.cloudflare.com/ko-kr/
+: 사이트로 들어오는 통계 정보/ 프록시 서버를 활용할 수 있음
+
+puttygen
+-> key생성
+
+private key 다운
+
+https://www.freenom.com/en/index.html?lang=en
+-> 무료 도메인
+
+https://velog.io/@jimin_lee/Nginx%EC%99%80-Gunicorn-%EB%91%98-%EC%A4%91-%ED%95%98%EB%82%98%EB%A7%8C-%EC%8D%A8%EB%8F%84-%EB%90%A0%EA%B9%8C
+
+pip install django-cors-headers
+: 장고가 보안상 막아주는걸 일부로 풀어줘야함 
+account > views.py
+from django.views.decorators.csrf import csrf_exempt
+@csrf_exempt
+def get_token(request):
+    params = json.loads(request.body)
+    user = authenticate(
+        username=params['username'], password=params['password'])
+    if not user:
+        return JsonResponse({"is_success": False})
+
+    token = Token.objects.get_or_create(user=user)
+    return JsonResponse({"is_success": True, "token": str(token[0]), "user": str(user)})
+
+app > settings.py
+ALLOWED_HOSTS = ['*']
+
+CORS_ALLOWED_ORIGINS = [
+    'http://127.0.0.1:5500',
+]	# 나중에 바꾸ㅝ야하는 값
+
+
+INSTALLED_APPS = [
+'corsheaders'
+]
+
+MIDDLEWARE = [
+'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware'
+]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+account > urls.py
+urlpatterns = [
+    path('login_bi/', views.get_token, name='login_bi'),
+]
+
+
+
+
+live server : vscode window에서 설치
+
+
+event driven develop / 비동기 > 공부
+
+
+
+
+putty
+https://docs.docker.com/engine/install/ubuntu/
+
+> sudo apt-get update
+> sudo apt-get install \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+> sudo mkdir -p /etc/apt/keyrings
+> echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+>sudo apt-get update
+>sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+
+
+https://docs.djangoproject.com/en/4.1/howto/deployment/wsgi/gunicorn/
+> pip install gunicorn
+> gunicorn app.wsgi
+> python3 manage.py collectstatic
+# 엔진x설치
+> sudo apt-get install nginx
+> sudo apt-get update
+
+> su
+1234
+# 오라클은 추가요금이 안들지만 aws는 추가요금이 많이 들 수 있음
+# /etc/nginx/nginx.conf
+: https://docs.gunicorn.org/en/latest/deploy.html
+server name www.아이피 넣기
+/home/big/study/corona_rest # 경로넣기
+proxy_pass http://127.0.0.1:8000 # 동적정보는 어플리케이션(장고서버)로 보내기
+: 저장하고 도커 커밋
+docker commit corona_rest seojeon9/corona_deploy:1.0
+
+docker run -it `
+--name corona_deploy `
+-u big `
+-h localhost `
+-p 8000:8000 `
+-p 80:80 `
+-v C:\CODE\DE\corona_rest:/home/big/corona_rest `
+azimemory/corona_deploy:1.0
+
+
+gunicorn -b :8000 app.wsgi &
+nohup gunicorn -b :8000 app.wsgi &
+sudo service nginx start
+docker commit corona_rest seojeon9/corona_deploy:1.1
+# & : 백앤드에서도 돌아가게 하는 명령어
+
+docker run -it `
+--name corona_deploy `
+-u big `
+-h localhost `
+-p 8000:8000 `
+-p 80:80 `
+-v C:\CODE\DE\corona_rest:/home/big/corona_rest `
+seojeon9/corona_deploy:1.1
+
+# putty
+service docker start
+sudo service docker start
+sudo docker login
+sudo docker pull seojeon9/corona_deploy:1.1
+=> 배포할 환경 완성
+
+DataLake로 s3쓰면 좋겠지만 만일 잘못해서 트래픽이 많아지거나 하면 요즘을 감당할 수 없음,,,,
+
+
+docker run -it `
+--name corona_deploy `
+-u big `
+-h localhost `
+-p 8000:8000 `
+-p 80:80 `
+seojeon9/corona_deploy:1.1
+
+docker cp [host 파일경로] [container name]:[container 내부 경로]
+docker cp C:\CODE\DE\corona_rest corona_deploy:/home/big
+docker commit corona_deploy seojeon9/corona_deploy:1.2
+
+# putty
+sudo docker run -itd `
+--name corona_deploy `
+-u big `
+-h localhost `
+-p 8000:8000 `
+-p 80:80 `
+seojeon9/corona_deploy:1.2
+
+sudo docker exec -it corona_deploy bash
+vim /etc/nginx/nginx.conf
+server name 클라우드서버ip
+=> 배포완료
