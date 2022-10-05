@@ -1,0 +1,80 @@
+프로젝트 발표
+
+데이터 수집 대상 
+	주가, 부동산, 예금리를 기준으로 제테크 분석에 필요한 데이터
+	부동산 거래 분석을 위해 필요한 데이터
+	영화 흥행 요인분석을 위한 데이터	
+		
+		
+데이터 프로덕트 
+	datamart(erd cloud)	 	: 데이터마트의 테이블을 소개하며 분석을 위해 어떤 변인간의 상관관계를 고려하였는 지 안내
+	rest-api 서버 			: postman을 사용해 rest-api 서버 시연
+	bi						: 데이터 시각화 시연, 
+		
+		
+프로젝트 진행	
+
+	여러 명이 하나의 프로젝트를 협업하기 위해 고민했던 내용들				
+		협업툴 : trello
+			   trello를 사용한 이유
+			   프로젝트 일정, 업무분장, 협업을 위해 합의한 사안들. 
+			   
+		환경   : docker container 기반 환경구축  
+			   docker를 사용한 이유
+		
+		버전관리 : git
+				git을 사용한 이유, git과 docker container 간 시너지			
+			
+	
+기술 스택
+
+	1. ETL Project : Data Lake 			: hadoop hdfs
+					 데이터웨어하우스, 데이터마트 : Oracle ATP 
+											- 클라우드 DB를 선택한 이유
+					 데이터 가공 및 분산처리엔진 : spark
+					 배치 도구 			: airflow
+											- 작업스케쥴러나, crontab 대신 airflow를 선택한 이유
+											
+	2. rest-api server : Web Framework : django
+										 django rest framework
+										 
+	3. bi				: 언어 : html, css, javascrip
+						  프레임워크 :  bootstrap
+						  라이브러리 :  ploatly.js
+						 
+
+	
+데이터 파이프라인 설계 내용
+		
+	수집 : 수집한 데이터의 종류, 수집 방식, 사용한 데이터레이크, hdfs 선택한 이유 
+		  수집 전과 데이터레이크에 저장하는 시점의 데이터의 befor -> after
+		  	
+	가공 : 가공전 데이터와 데이터웨어하우스에 저장되는 데이터의 befor -> after
+		  datawarehouse 설계 시 고려하였던 부분
+		  
+	데이터마트 : 데이터마트 설계시 고려하였던 부분
+	
+	배치도구 : airflow dag graph 설명
+		  airflow를 실행하여 데이터파이프라인 시연
+		  
+
+rest-api, bi
+	프론트서버와 백앤드서버 분리구조 => 토큰기반 인증	
+	비동기 통신.
+
+
+배포:
+	백앤드서버 : oracle vm instance, aws ec2 instance	
+	프론트앤드 : github page
+
+		 
+프로젝트 마친 소감
+	
+	프로젝트 결과물에 대한 개선할 부분, 또는 확장할 내용들
+	협업을 하면서 느낀 협업의 장점, 아쉬웠던 부분, 팀원들에 대한 감사인사
+		   
+		  
+	
+
+	
+
