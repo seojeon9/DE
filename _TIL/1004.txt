@@ -133,7 +133,6 @@ sudo docker pull seojeon9/corona_deploy:1.1
 
 DataLake로 s3쓰면 좋겠지만 만일 잘못해서 트래픽이 많아지거나 하면 요즘을 감당할 수 없음,,,,
 
-
 docker run -it `
 --name corona_deploy `
 -u big `
