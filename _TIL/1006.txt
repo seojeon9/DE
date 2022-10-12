@@ -1,0 +1,55 @@
+django로 rest요청할때 80, 8000번 포트 필요
+
+docker pull jhjzmdk/movie_rest:1.0
+
+docker run -it `
+--name movie_rest `
+-u big `
+-h localhost `
+-p 18080:18080 `
+-p 9870:9870 `
+-p 9864:9864 `
+-p 8081:8081 `
+-p 8082:8082 `
+-p 8000:8000 `
+-p 80:80 `
+-v C:\CODE\DE\project:/home/big/study `
+jhjzmdk/movie_rest:1.0
+
+sudo service nginx start
+gunicorn -b :8000  app.wsgi
+
+키값
+
+6f2b465b25f40650abb3330460e110c2
+cca76a078d931f0d7b0d1fbf8a09fe3b
+d23a92d0e66b3a76f158982542b07b57
+47d13cfaba80240575ba1e24666174e1
+6cdee3cbd6d29e49fdc6bd17a2feb85b
+1ff92b190442e207eca359edbc1ac0f7
+3387f332d32902343905815ad8c91ff6
+fde9a5e3808cd37d4d48908822838f87
+3ad2d800ada4ee67f4d049b66e903680
+da44ecaeb6997f4ea2800f5e416a8edd
+
+관객수 개봉일 스크린수
+
+관객수 개봉일 상영횟수 - 승종
+관객수 개봉일 매출 - 상엽
+관객수 개봉일 관객수 - 현진
+관객수 관람객평점 - 지수
+
+
+################################
+내가 지금 해야하는거
+python3 main.py extract daily_boxoffice : 키 바꿔가면서
+python3 main.py transform daily_boxoffice
+python3 main.py extract movie_detail : 키 바꿔가면서
+python3 main.py transform movie_detail
+python3 main.py extract execute
+python3 main.py transform execute
+python3 main.py extract movie_score
+python3 main.py transform movie_score
+python3 main.py datamart movie_hit
+python3 main.py datamart movie
+python3 main.py datamart execute
