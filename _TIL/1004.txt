@@ -31,7 +31,7 @@ ALLOWED_HOSTS = ['*']
 
 CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:5500',
-]	# 나중에 바꾸ㅝ야하는 값
+]	# 나중에 바꿔야하는 값
 
 
 INSTALLED_APPS = [
@@ -113,6 +113,8 @@ sudo service nginx start
 docker commit corona_rest seojeon9/corona_deploy:1.1
 # & : 백앤드에서도 돌아가게 하는 명령어
 
+=> 에러나는거 확인하려면 nohub.out
+
 docker run -it `
 --name corona_deploy `
 -u big `
@@ -130,7 +132,6 @@ sudo docker pull seojeon9/corona_deploy:1.1
 => 배포할 환경 완성
 
 DataLake로 s3쓰면 좋겠지만 만일 잘못해서 트래픽이 많아지거나 하면 요즘을 감당할 수 없음,,,,
-
 
 docker run -it `
 --name corona_deploy `
