@@ -1,0 +1,44 @@
+* last.fm
+: https://www.last.fm/api#getting-started
++ 참고 블로그 https://jae04099.tistory.com/78 
+
+* spotify
+: https://developer.spotify.com/
++ 그러나 한국 음악이 많이 없고 호출 절차가 복잡하며
+데이터를 따로 저장하거나 처리하면 안되고 스포티파이 로그인 기능을 구현하여
+스포티파이를 사용하듯 써야한다.... pass
+
+* itunes
+: https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/Searching.html#//apple_ref/doc/uid/TP40017632-CH5-SW1
++ 음악 외 영화, 오디오북등 다양한 정보 제공 but api호출 분당 20회로 제한,,
+
+
+* Mania DB
+: http://www.maniadb.com/main/
+http://www.maniadb.com/api/ (개발자용 페이지)
+,,,, 근데 문거 귀찮아서 안 만들었다고 하는게 꽤나 킹 받는다.
+그리고 xml으로 반환을 함 별도의 파싱 작업이 필요함
+
+* Musixmatch
+: https://developer.musixmatch.com/
+-> 이거 좀 괜찮아보임
+
+
+
+
+#######################
+
+* Musixmatch 가사 크롤링 : https://intrepidgeeks.com/tutorial/use-musixmatch-to-get-the-lyrics-of-your-favorite-songs-in-python
+=> https://www.musixmatch.com/lyrics/SEVENTEEN-5/VERY-NICE 
+이런식으로 한국 노래 있고 가사도 한국어인데 대신 제목이나 가수 이름이 영어로 기재
+
+* 이게 가능하다고??? Musixmath import해서 사용하기 : https://morioh.com/p/37357b8b6c0c
+
+
+
+1. 모든 노래의 가사에 대해 우울, 기쁨, 이별, 편안, 기쁨 의 지수가 있어야 함
+가사 -> 비정형데이터의 정형화 : RDD 한국어 버전 
+2. 컨텐츠 기반 필터링
+3. 하이브리드 방식으로 진행하면 모든 요소들을 고려해서 필터링 가능
+컨텐츠 기반 - 아이템 기반 둘다 약간씩 가지고 오는거
+https://github.com/alswhddh/lyrics_emotion_analysis
