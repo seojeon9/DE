@@ -1,0 +1,11 @@
+/usr/lib/python3.8/socket.py:740: ResourceWarning: unclosed <socket.socket fd=8, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=6, laddr=('127.0.0.1', 35524), raddr=('127.0.0.1', 42615)>
+  self._sock = None
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+
+어제 부터 나를 괴롭힌 이 오류,,,,,
+대체 뭘까
+
+: 근데 일단 얘가 문제는 아니였음 얘는 단순 워닝
+그래도 거슬려 원인이 뭐야!
+
+강사님도 저거 해결하려고 찾아봤었는데 close해주는 애를 못 찾았다고 함^^
