@@ -1,0 +1,20 @@
+통신의 성공 200, 실패 400,500은 http의 response에 들어있음
+그래서 응답데이터로 status_code를 따로 두지 않아도 되고
+만약 로그인의 경우 어떻게 실패했는지에 따라 경고문구같은거를 다르게 하고 싶다면 응답데이터를 통해 통신결과코드를 받아와도 됨
+
+그리고 get/post/put/delete의 경우 rest api => 비동기통신
+우리가 지금 사용하는 통신은 html5의 form을 이용한 통신
+그래서 get/post로 통일하는게 좋을 듯
+
+응답데이터에 성공 실패 여부를 보내주려면 fetch라는 친구를 활용해도 좋음
+
+# HDFS PySpark 한번에 여러 파일 read
+https://louisdev.tistory.com/34
+https://0equal2.tistory.com/159
+https://eyeballs.tistory.com/459
+
+
+# KoNLPy 돌리는데 killed 에러
+https://shelling203.tistory.com/52
+https://yjs-program.tistory.com/10
+https://unix.stackexchange.com/questions/390184/dmesg-read-kernel-buffer-failed-permission-denied
