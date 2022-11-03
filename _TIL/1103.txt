@@ -1,0 +1,24 @@
+web 가상환경 세팅
+https://uiandwe.tistory.com/1215
+
+
+https://cx-oracle.readthedocs.io/en/latest/user_guide/installation.html#installing-cx-oracle-on-linux
+python -m pip install cx_Oracle --upgrade
+pip install cx_Oracle
+
+python manage.py inspectdb > my_road_pet/models.py
+※Couldn't import Django. Are you sure it's installed and available on your PYTHONPATH environment variable? Did you forget to activate a virtual environment?
+=> https://w-world.tistory.com/92
+pip install django
+
+※django.db.utils.DatabaseError: DPI-1047: Cannot locate a 64-bit Oracle Client library: "The specified module could not be found". See https://cx-oracle.readthedocs.io/en/latest/user_guide/installation.html for help
+mkdir -p /opt/oracle
+
+
+===============================================
+https://cx-oracle.readthedocs.io/en/latest/user_guide/installation.html#installing-cx-oracle-on-windows
+===============================================
+https://geumjubu.tistory.com/1
+===============================================
+
+https://myjamong.tistory.com/288
