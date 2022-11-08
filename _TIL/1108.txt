@@ -1,0 +1,15 @@
+anaconda/python 삭제 : 이유 충돌 날 수 있음
+python 3.10.5 installer > C:\CODE/PYTHON/
+path등록
+
+# 해야할일
+.venv gitignore
+
+# 가상환경 세팅
+python -m venv .venv # 가상환경 생성
+.venv/Scripts/activate # 가상환경 키는 명령어
+
+pip install django
+pip install cx_Oracle
+pip install -U scikit-learn
+pip install pandas
