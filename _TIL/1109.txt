@@ -1,0 +1,14 @@
+.venv/Scripts/activate
+
+python manage.py test account.tests.ccounts.signup
+
+git rm -r --cached .
+git add .
+git commit -m 'rm cached'
+
+# django auth
+https://docs.djangoproject.com/en/4.1/topics/auth/
+request.user
+
+model -> a.key
+dictionary -> a['key':]
