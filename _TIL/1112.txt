@@ -1,0 +1,18 @@
+15일 지난 유기견 update - 프로시저 or 트리거 / 스케줄러
+https://mystarlight.tistory.com/226
+https://l2j.co.kr/1217
+
+이런아이들도 있어요 3마리 보여주고 옆으로 넘기기
+https://eunhee-programming.tistory.com/106
+
+보호소 정보 팝업
+https://as-you-say.tistory.com/288
+https://bythem.net/2021/04/02/css-%EB%A9%8B%EC%A7%84-%ED%8C%9D%EC%97%85%EC%B0%BD%EC%9D%84-%EB%A7%8C%EB%93%A4%EA%B8%B0/
+
+프로세스 도식화 -> DFD : 보는 사람이 잘 이해할 수 있도록
+데이터 아키텍처 : 수집/ 적재/ 모델링/ 서비스 등등 - 한 세트 (주기,원천데이터,,,)
+서비스 구성도
+
+* 깃 이슈를 어떻게 해결했어요
+* 전체적인 흐름만 잘 연결하면 될 것 같음
+* 기획이 수정된 이유 
