@@ -1,0 +1,36 @@
+비동기요청
+- jquery
+https://initstory.tistory.com/20
+https://hooongs.tistory.com/23
+https://noodle-dev.tistory.com/61
+
+하지만
+(index):434 Uncaught TypeError: $.ajax is not a function at HTMLButtonElement.show
+이런 에러가 뜨며 안돼서 강사님께 여쭤봤더니
+
+fetch그냥 쓰라고 하심
+* https://developer.mozilla.org/ko/docs/Web/API/Fetch_API/Using_Fetch
+
+===================================================
+오라클 프로시저 잡 스케줄러
+https://sookr5416.tistory.com/63?category=456346
+https://studyingazae.tistory.com/59
+
+# 현재까지 작성한 프로시저문
+CREATE OR REPLACE PROCEDURE UPDATE_PROCESS
+IS
+    v_PROCESS_ST VARCHAR2(255);
+    v_HAPPEN_DT VARCHAR2(255);
+-- 커서 생성
+BEGIN
+    UPDATE PROCESS_ST
+    SET PROCESS_ST = '종료 (안락사)'
+    WHERE happen_dt < TO_CHAR(SYSDATE-15, 'YYYYMMDD') AND process_st = '보호중'
+    
+
+
+SELECT *
+FROM roaddog_info
+WHERE happen_dt < TO_CHAR(SYSDATE-15, 'YYYYMMDD') AND process_st = '보호중'
+;
+
