@@ -1,0 +1,44 @@
+하둡이 차지하는 포지션의 '배드섹터'
+디스크문제
+
+ajax 못찾는 에러났던거는
+아마 버전문제였을것 같다는게 문강사님의 의견
+
+요청해서 데이터를 반환해줘야하는 경우는 ajax로 하는게 좋은데
+지금은 그게 아니기 때문에 어싱크 fetch로 하는것도 괜찮음
+요즘 새로운 기술이 어싱크 fetch이긴 하지만 아직 ajax를 많이 쓰긴 함
+
+===============================================
+DE : 
+시스템 구성도
+테이블은 관계만 보여주고 모든 컬럼을 보여주지 않아도 됨. 컬럼을 보여주겠다고 하면 타입과 같은 정보들은 필요없음
+etl하는 과정이 제일 중요
+
+===============================================
+oracle job scheduler
+https://velog.io/@jny9708/Oracle-%EC%8A%A4%EC%BC%80%EC%A4%84%EB%9F%AC-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0
+
+# 프로시저
+CREATE OR REPLACE PROCEDURE UPDATE_PROCESS
+IS
+BEGIN
+    UPDATE ROADDOG_INFO
+    SET PROCESS_ST = '종료 (안락사)'
+    WHERE HAPPEN_DT < TO_CHAR(SYSDATE-15, 'YYYYMMDD') AND PROCESS_ST = '보호중';
+    COMMIT;
+END;
+
+# 잡 스케줄러
+BEGIN
+    DBMS_SCHEDULER.CREATE_JOB (
+        JOB_NAME => 'UPDATE_PROCESS_JOB'
+        , START_DATE => TRUNC(SYSDATE+1)+6/24
+        , REPEAT_INTERVAL => 'FREQ=DAILY;INTERVAL=1'
+        , END_DATE => NULL
+        , JOB_CLASS => 'DEFAULT_JOB_CLASS'
+        , JOB_TYPE => 'STORED_PROCEDURE'
+        , JOB_ACTION => 'UPDATE_PROCESS'
+        , COMMENTS => '유기견 상태 변환 JOB'
+    );
+    DBMS_SCHEDULER.ENABLE('UPDATE_PROCESS_JOB');
+END;
