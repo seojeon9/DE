@@ -1,0 +1,177 @@
+################## rest-api 백앤드서버 배포 ##################
+
+-- : 코드를 작성해야 하는 파일 또는 위치
+## : 설명
+
+
+-------------- 프론트서버와 비동기통신을 위해 cors 옵션 끄기 --------------
+
+-- settings.py
+pip install django-cors-headers
+
+INSTALLED_APPS = [
+    ...
+    'corsheaders',
+    ...
+]
+
+MIDDLEWARE = [
+    ...,
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    ...,
+]
+
+## 허용할 크로스오리진 등록, 프론트서버의 주소여야함
+CORS_ALLOWED_ORIGINS = [
+    'http://127.0.0.1:5500',
+]
+
+
+-------------- nginx에 지정할 static_root 지정 --------------
+
+-- settings.py
+## DEBUG 모드 끄기
+DEBUG = False
+
+## web server인 nginx가 탐색할 static root 경로 지정
+STATIC_ROOT = os.path.join(BASE_DIR, 'static') 
+
+## css 파일 한 곳으로 모으기
+-- 터미널
+python3 manage.py collectstatic 
+
+-------------- 프론트서버에 token 발행 --------------
+
+-- account/views.py
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt
+def get_token(request):
+    params = json.loads(request.body)
+    user = authenticate(username=params['username'], password=params['password'])
+    if not user:
+        return JsonResponse({"is_success": False})
+
+    token = Token.objects.get_or_create(user=user)
+    return JsonResponse({"is_success": True, "token": str(token[0]), "user": str(user)})
+
+
+-- account/urls.py
+urlpatterns = [
+	...
+	path('login_bi/', views.get_token, name='login_bi'),
+	...
+]
+
+-------------- gunicorn --------------
+## python wsgi인 gunicorn 설치
+--터미널
+pip install gunicorn
+## gunicorn 실행 명령어
+nohup gunicorn -b :8000  app.wsgi &
+
+
+-------------- nginx --------------
+## nginx 설치
+sudo apt-get update
+sudo apt-get install nginx
+
+## /etc/nginx/nginx.conf 파일 수정
+## 아래 config 파일 예제로 기존 nginx.conf 파일 덮어쓰기
+## ref : https://docs.gunicorn.org/en/latest/deploy.html#nginx-configuration
+
+
+## 이후 아래 항목들을 각자의 서버에 알맞게 수정
+
+http{
+	...
+	 server {
+		# if no Host match, close the connection to prevent host spoofing
+		listen 80 default_server;
+		return 444;
+	}
+	
+	server {
+		# path for static files
+		root python3 manage.py collectstatic  명령어로 생성된 static 폴더의 위치;   ex : /home/big/corona_rest		
+		
+		server_name 서버의 주소, www.서버의 주소;
+		
+		location @proxy_to_app {
+		  ...
+		  proxy_pass http://localhost:8000;
+		  ...
+		}
+	}
+	...
+}
+
+
+--터미널
+sudo service nginx start
+
+이후 서버 주소로 접근해 사이트 뜨는 것 확인
+(로컬이라면 127.0.0.1, 배포했다면 서버의 아이피 또는 도메인주소)
+
+
+################## 배포 이미지 생성 ##################
+
+## 기존 컨테이너를 commit 한 뒤 컨테이너는 삭제
+docker commit corona_rest azimemory/corona_deploy:1.2
+docker stop corona_rest
+docker rm corona_rest
+
+
+## 새롭게 생성된 이미지로 컨테이너 생성
+sudo docker run -itd `
+--name corona_deploy `
+-u big `
+-h localhost `
+-p 8000:8000 `
+-p 80:80 `
+azimemory/corona_deploy:1.2
+
+
+## 소스코드를 docker 컨테이너 안으로 복사
+docker cp [host 파일경로] [container name]:[container 내부 경로]
+
+## 소스 코드가 포함된 컨테이너를 이미지로 저장
+docker commit corona_deploy azimemory/corona_deploy:1.2
+
+## 도커허브로 푸시
+docker push azimemory/corona_deploy:1.2
+
+
+################## 오라클vm인스턴스 도커설치 ##################
+
+sudo apt-get update
+
+sudo apt-get install \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+	
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+echo \
+  "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  
+  
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+sudo service docker start
+sudo docker login
+sudo docker pull azimemory/corona_deploy:1.2
+
+
+## 이미지 컨테이너화
+sudo docker run -itd \
+--name corona_deploy \
+-u big \
+-h localhost \
+-p 8000:8000 \
+-p 80:80 \
+azimemory/corona_deploy:1.2

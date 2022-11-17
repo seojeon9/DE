@@ -1,0 +1,86 @@
+producer topic consumer 
+	log -> DataLake
+
+# 카프카 설치
+https://kafka.apache.org/quickstart
+
+cd ~
+ls
+wget https://dlcdn.apache.org/kafka/3.3.1/kafka_2.13-3.3.1.tgz
+tar -xzf kafka_2.13-3.3.1.tgz
+cd kafka_2.13-3.3.1
+
+zokeeper -> kafka 순서로 올라가야함
+
+# Start the ZooKeeper service
+bin/zookeeper-server-start.sh config/zookeeper.properties
+
+# powershell열어서
+# Start the Kafka broker service
+bin/kafka-server-start.sh config/server.properties
+
+# powershell열어서
+vim config/kraft/server.properties # 카프카 설정 파일
+
+log.retention.hours = 시간 변경
+
+# CREATE A TOPIC TO STORE YOUR EVENTS
+bin/kafka-topics.sh --create --topic heartdognal-log --bootstrap-server localhost:9092
+
+# 토픽확인
+bin/kafka-topics.sh --bootstrap-server=localhost:9092 --list
+
+==================================================
+# 에어플로우 붙인 버전으로 풀
+docker run -it `
+--name heartdognal `
+-u big `
+-h localhost `
+-p 18080:18080 `
+-p 9870:9870 `
+-p 9864:9864 `
+-p 8081:8081 `
+-p 8082:8082 `
+-p 8000:8000 `
+-p 80:80 `
+-v C:\CODE\DE\RoadPet:/home/big/study `
+leesylee/heart_dognal:1.0
+
+
+chmod +rwx /etc/ld.so.conf.d/oracle-instantclient.conf
+
+==================
+ps -ef
+
+nohup gunicorn -b :8000 RoadPet.wsgi &
+sudo service nginx start
+
+=============카프카
+-chmod -777 
+# powershell에서
+D_corona에서 python3 main.py
+
+session : 사용자가 얼마나 체류했는지 등등 을 하기 위한 세션
+근데 지금은 브라우저를 꺼도 로그아웃이 안되기때문에 타임아웃을 걸꺼임
+pip install django-session-timeout
+
+settings.py
+MIDDLEWARE_APPS [
+'django_session_timeout.middleware.SessionTimeoutMiddleware',
+]
+
+middleware.py추가
+등등 추가...
+
+pip install kafka-python
+
+구니콘 내렸다가 다시 올리면
+===================================================
+docker cp C:\CODE\DE\RoadPet\roadpet_webpage heartdognal:/home/big
+===================================================
+서버에서 돌릴때는 run -itd
+
+80, 8000
+vminstance 
+===================================================
+cloudflare
