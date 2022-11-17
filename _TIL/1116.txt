@@ -1,0 +1,8 @@
+* roaddog_info에서 desertion_no PK로 설정 안되어 있어서 값이 중복해서 들어갔던 이슈
+http://www.acronet.kr/python/26531
+DELETE from roaddog_info a WHERE ROWID < (SELECT MAX(ROWID) FROM roaddog_info b
+WHERE b.desertion_no = a.desertion_no);
+중복되는 경우 최근에 있는 컬럼 살리고 오래된 데이터 삭제
+
+
+* 카프카 붙이기로 했는데 앞으로 카프카로 어떤 데이터를 쌓아서 발전해나갈지 - 개선방향 : DE관점
